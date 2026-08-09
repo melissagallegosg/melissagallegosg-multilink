@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Resumen — melissagallegosg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=Poppins:wght@300;400;500;600&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #050505;
+    --deep: #1A0B3D;
+    --violet: #5B1EFF;
+    --magenta: #D946EF;
+    --cyan: #00E5FF;
+    --gold: #F6C453;
+    --lavender: #B69CFF;
+    --white: #ffffff;
+    --silver: #c9c3e0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--void);
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+  }
+  .aura-bg {
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(91,30,255,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 80% 80%, rgba(217,70,239,0.10) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 40% at 20% 60%, rgba(0,229,255,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .container { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; padding: 20px 20px 80px; }
+
+  .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 10px 0 30px; }
+  .top-nav a { color: var(--cyan); text-decoration: none; font-size: 0.85em; letter-spacing: 1px; opacity: 0.85; }
+  .top-nav a:hover { opacity: 1; }
+
+  h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1.6em, 6vw, 2.3em);
+    text-align: center;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, var(--lavender) 0%, var(--cyan) 50%, var(--violet) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 6px;
+  }
+  .subtitle { text-align: center; color: var(--silver); font-size: 0.95em; margin-bottom: 40px; }
+
+  .phase-card {
+    background: rgba(91,30,255,0.06);
+    border: 1px solid rgba(182,156,255,0.2);
+    border-radius: 18px;
+    padding: 24px;
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .phase-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent, var(--cyan)), transparent);
+  }
+  .phase-card.fase1 { --accent: #00E5FF; }
+  .phase-card.fase2 { --accent: #5B1EFF; }
+  .phase-card.fase3 { --accent: #B69CFF; }
+  .phase-card.fase4 { --accent: #D946EF; }
+
+  .phase-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.72em;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent, var(--cyan));
+    margin-bottom: 10px;
+  }
+  .phase-title { font-size: 1.25em; font-weight: 600; margin-bottom: 10px; color: var(--white); }
+  .phase-line { color: var(--silver); font-size: 0.92em; margin: 4px 0; line-height: 1.6; }
+  .phase-line strong { color: var(--white); }
+  .empty-state { color: #8a84a8; font-style: italic; font-size: 0.9em; }
+  .empty-state a { color: var(--cyan); text-decoration: none; }
+
+  .synthesis {
+    margin-top: 36px;
+    padding: 28px 24px;
+    background: linear-gradient(135deg, rgba(91,30,255,0.12), rgba(0,229,255,0.06));
+    border: 1px solid rgba(0,229,255,0.25);
+    border-radius: 18px;
+    text-align: center;
+  }
+  .synthesis h2 { font-family: 'Cinzel', serif; font-size: 1.1em; color: var(--gold); letter-spacing: 2px; margin-bottom: 16px; }
+  .synthesis p { color: var(--silver); line-height: 1.8; font-size: 0.95em; }
+  .synthesis strong { color: var(--white); }
+
+  .footer-actions { margin-top: 40px; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+  .btn-map {
+    display: inline-block; padding: 14px 36px; border-radius: 30px;
+    border: 1px solid rgba(0,229,255,0.35); color: var(--cyan);
+    text-decoration: none; font-size: 0.95em; letter-spacing: 1px;
+    background: rgba(91,30,255,0.08); transition: all 0.3s ease;
+  }
+  .btn-map:hover { background: rgba(91,30,255,0.18); }
+  .reset-link { color: #6b6684; font-size: 0.78em; text-decoration: underline; cursor: pointer; background: none; border: none; font-family: 'Poppins', sans-serif; }
+</style>
+</head>
+<body>
+<div class="aura-bg"></div>
+<div class="container">
+  <div class="top-nav">
+    <a href="index.html">← Volver al mapa</a>
+    <span style="color:#8a84a8; font-size:0.8em; letter-spacing:1px;">@melissagallegosg</span>
+  </div>
+
+  <h1>✦ Mi Recorrido ✦</h1>
+  <p class="subtitle">Lectura consolidada de tus 4 fases</p>
+
+  <div id="phasesContainer"></div>
+
+  <div id="synthesisContainer"></div>
+
+  <div class="footer-actions">
+    <a href="index.html" class="btn-map">Volver al mapa</a>
+    <button class="reset-link" onclick="resetJourney()">Borrar mis resultados guardados</button>
+  </div>
+</div>
+
+<script>
+  function getStore() {
+    try { return JSON.parse(localStorage.getItem('mg_journey') || '{}'); }
+    catch (e) { return {}; }
+  }
+
+  function renderEmpty(label, link, accentClass) {
+    return `
+      <div class="phase-card ${accentClass}">
+        <div class="phase-label">${label}</div>
+        <div class="empty-state">Aún no has hecho esta fase. <a href="${link}">Hacerla ahora →</a></div>
+      </div>
+    `;
+  }
+
+  function render() {
+    const store = getStore();
+    const container = document.getElementById('phasesContainer');
+    let html = '';
+
+    // FASE 1 — Identifica (Ritmo Alfa)
+    if (store.fase1) {
+      html += `
+        <div class="phase-card fase1">
+          <div class="phase-label">Fase 1 · Identifica</div>
+          <div class="phase-title">${store.fase1.arquetipo}</div>
+          <div class="phase-line">Tu patrón de abandono dominante. Rasgos secundarios de <strong>${store.fase1.arquetipoSecundario}</strong>.</div>
+        </div>
+      `;
+    } else {
+      html += renderEmpty('Fase 1 · Identifica', 'fase1-identifica.html', 'fase1');
+    }
+
+    // FASE 2 — Alinea (Método 369)
+    if (store.fase2) {
+      html += `
+        <div class="phase-card fase2">
+          <div class="phase-label">Fase 2 · Alinea</div>
+          <div class="phase-title">${store.fase2.proposito}</div>
+          <div class="phase-line"><strong>Visión a 1 año:</strong> ${store.fase2.vision}</div>
+          <div class="phase-line"><strong>Identidad que cultivas:</strong> ${store.fase2.identidad}</div>
+        </div>
+      `;
+    } else {
+      html += renderEmpty('Fase 2 · Alinea', 'fase2-alinea.html', 'fase2');
+    }
+
+    // FASE 3 — Conecta (Ikigai)
+    if (store.fase3) {
+      html += `
+        <div class="phase-card fase3">
+          <div class="phase-label">Fase 3 · Conecta</div>
+          <div class="phase-title">${store.fase3.areaPrincipal}</div>
+          <div class="phase-line"><strong>Enfoque de desarrollo:</strong> ${store.fase3.enfoque}</div>
+          <div class="phase-line">${store.fase3.activado ? 'Ikigai activado: buen balance en las 4 dimensiones.' : 'Ikigai en desarrollo: hay una dimensión por fortalecer.'}</div>
+        </div>
+      `;
+    } else {
+      html += renderEmpty('Fase 3 · Conecta', 'fase3-conecta.html', 'fase3');
+    }
+
+    // FASE 4 — Ejecuta (Ritmo Beta)
+    if (store.fase5) {
+      html += `
+        <div class="phase-card fase4">
+          <div class="phase-label">Fase 4 · Ejecuta</div>
+          <div class="phase-title">${store.fase5.patronEjecucion}</div>
+          <div class="phase-line">${store.fase5.descripcion}</div>
+        </div>
+      `;
+    } else {
+      html += renderEmpty('Fase 4 · Ejecuta', 'fase5-ejecuta.html', 'fase4');
+    }
+
+    container.innerHTML = html;
+
+    const completed = ['fase1','fase2','fase3','fase5'].filter(k => store[k]).length;
+    const synth = document.getElementById('synthesisContainer');
+    if (completed === 4) {
+      synth.innerHTML = `
+        <div class="synthesis">
+          <h2>✦ TU MAPA COMPLETO ✦</h2>
+          <p>
+            Tu patrón de abandono es <strong>${store.fase1.arquetipo}</strong>, y tu propósito declarado es
+            <strong>"${store.fase2.proposito}"</strong>.
+            Tu mayor afinidad está en <strong>${store.fase3.areaPrincipal}</strong>,
+            y tu forma natural de ejecutar es la de <strong>${store.fase5.patronEjecucion}</strong>.
+          </p>
+          <p style="margin-top:14px;">Cuando conectas estas cuatro piezas — de dónde vienes, hacia dónde vas, qué te mueve y cómo ejecutas — dejas de depender de la motivación y empiezas a sostener con coherencia.</p>
+        </div>
+      `;
+    } else {
+      synth.innerHTML = `
+        <div class="synthesis">
+          <h2>✦ TU MAPA EN CONSTRUCCIÓN ✦</h2>
+          <p>Llevas ${completed} de 4 fases completadas. Termina el recorrido para ver tu lectura consolidada.</p>
+        </div>
+      `;
+    }
+  }
+
+  function resetJourney() {
+    if (!confirm('¿Seguro que quieres borrar todos tus resultados guardados de las 4 fases?')) return;
+    localStorage.removeItem('mg_journey');
+    render();
+  }
+
+  render();
+</script>
+</body>
+</html>

@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ikigai — Descubre tu razón de ser</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #050505;
+    --violet: #5B1EFF;
+    --cyan: #00E5FF;
+    --lavender: #B69CFF;
+    --gold: #F6C453;
+    --white: #ffffff;
+    --muted: #cccccc;
+    --card: rgba(0,229,255,0.05);
+    --card-border: rgba(182,156,255,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--void);
+    color: #e0e0e0;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px 16px 60px;
+  }
+
+  .shell {
+    max-width: 900px;
+    width: 100%;
+    background: #0a0a0a;
+    border-radius: 20px;
+    padding: 30px 24px 40px;
+    box-shadow: 0 0 40px rgba(91,30,255,0.12);
+    border: 1px solid rgba(182,156,255,0.2);
+  }
+
+  .credit { text-align: right; font-size: 0.85em; color: var(--lavender); font-style: italic; margin-bottom: 18px; }
+
+  h1, h2, h3, h4 { font-family: 'Cinzel', serif; }
+
+  .gradient-text {
+    background: linear-gradient(135deg, var(--lavender) 0%, var(--cyan) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .fade-in { animation: fadeUp 0.5s ease both; }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* === INTRO === */
+  #intro h1 { font-size: clamp(1.7em, 5vw, 2.3em); margin-bottom: 20px; letter-spacing: 1px; }
+  #intro h3 { color: var(--cyan); font-size: 1.2em; margin: 20px 0 12px; }
+  #intro p { color: var(--muted); line-height: 1.7; margin-bottom: 12px; }
+  .dim-box {
+    margin: 22px 0;
+    padding: 18px;
+    background: rgba(0,229,255,0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(182,156,255,0.1);
+  }
+  .dim-item {
+    margin: 8px 0;
+    padding: 10px 14px;
+    background: rgba(0,229,255,0.08);
+    border-left: 3px solid var(--lavender);
+    border-radius: 6px;
+  }
+  .dim-item strong { color: var(--cyan); }
+  .italic-note { color: var(--lavender); font-style: italic; margin: 20px 0; }
+
+  /* === BUTTONS === */
+  .btn-primary {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--violet), var(--cyan));
+    color: #000;
+    border: none;
+    padding: 15px 38px;
+    font-size: 1.05em;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 5px 25px rgba(0,229,255,0.4); }
+  .btn-primary:disabled { background: rgba(182,156,255,0.15); color: #555; cursor: not-allowed; box-shadow: none; }
+  .btn-secondary {
+    background: transparent;
+    border: 2px solid var(--lavender);
+    color: var(--lavender);
+    padding: 13px 36px;
+    font-size: 1.05em;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+  }
+  .btn-secondary:hover { background: rgba(182,156,255,0.1); }
+
+  /* === TEST SCREEN === */
+  .step-count { text-align: center; font-size: 0.85em; font-weight: 600; color: var(--lavender); margin-bottom: 10px; }
+  .progress-track { width: 100%; height: 10px; background: rgba(182,156,255,0.1); border-radius: 10px; margin-bottom: 30px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--violet), var(--cyan)); border-radius: 10px; transition: width 0.5s ease; }
+  .step-header { text-align: center; margin-bottom: 24px; padding: 20px; background: rgba(182,156,255,0.08); border-radius: 16px; }
+  .step-header h2 { color: var(--lavender); font-size: 1.25em; margin-bottom: 8px; }
+  .step-header p { color: var(--muted); }
+
+  .step-body { background: rgba(0,229,255,0.04); padding: 22px; border-radius: 16px; margin-bottom: 22px; border: 1px solid rgba(182,156,255,0.1); }
+
+  .area-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  .area-card {
+    padding: 18px 12px;
+    border-radius: 14px;
+    border: 2px solid transparent;
+    background: rgba(0,229,255,0.05);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.25s ease;
+    font-family: 'Poppins', sans-serif;
+    color: var(--white);
+  }
+  .area-card:hover { background: rgba(0,229,255,0.1); border-color: rgba(182,156,255,0.3); }
+  .area-card.selected { background: rgba(182,156,255,0.2); border-color: var(--lavender); }
+  .area-card.disabled { opacity: 0.35; cursor: not-allowed; }
+  .area-card .emoji { font-size: 1.8em; display: block; margin-bottom: 8px; }
+  .area-card strong { font-size: 0.95em; }
+
+  .area-name-tag { color: var(--cyan); font-size: 1.1em; font-weight: 600; margin-bottom: 16px; }
+  .likert-q { font-size: 1.15em; color: var(--white); margin-bottom: 18px; }
+  .likert-opt {
+    display: flex;
+    align-items: center;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 2px solid transparent;
+    background: rgba(0,229,255,0.05);
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .likert-opt:hover { background: rgba(0,229,255,0.1); border-color: rgba(182,156,255,0.3); }
+  .likert-opt.selected { background: rgba(182,156,255,0.2); border-color: var(--lavender); }
+  .likert-dot { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #555; margin-right: 14px; flex-shrink: 0; }
+  .likert-opt.selected .likert-dot { border-color: var(--lavender); background: var(--lavender); }
+
+  .step-nav { display: flex; justify-content: space-between; gap: 14px; margin-top: 24px; flex-wrap: wrap; }
+
+  /* === RESULTS === */
+  #results h1 { font-size: clamp(1.6em, 5vw, 2.2em); margin-bottom: 20px; }
+  .result-hero {
+    background: linear-gradient(135deg, rgba(182,156,255,0.2), rgba(0,229,255,0.1));
+    padding: 30px 24px;
+    border-radius: 18px;
+    margin: 18px 0;
+    border: 2px solid var(--cyan);
+    text-align: center;
+  }
+  .result-hero .area-title { font-size: clamp(1.4em, 5vw, 1.8em); color: var(--lavender); font-weight: 700; margin-bottom: 10px; }
+  .result-hero p { color: var(--muted); }
+
+  .result-card { background: rgba(182,156,255,0.08); padding: 26px; border-radius: 18px; margin: 18px 0; border: 2px solid rgba(182,156,255,0.35); }
+  .result-card h3 { color: var(--cyan); margin-bottom: 16px; font-size: 1.15em; }
+
+  .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 14px; }
+  .score-box { text-align: center; padding: 16px; background: rgba(0,229,255,0.05); border-radius: 12px; border: 1px solid rgba(182,156,255,0.2); }
+  .score-box .num { font-size: 1.7em; font-weight: 700; color: var(--cyan); }
+  .score-box .lbl { font-size: 0.85em; color: var(--lavender); margin-top: 6px; }
+
+  .plan-card { margin-top: 26px; padding: 22px; background: rgba(0,229,255,0.04); border-radius: 16px; border-left: 4px solid var(--lavender); }
+  .plan-card h3 { color: var(--cyan); margin-bottom: 8px; }
+  .focus-line { color: var(--white); margin-bottom: 18px; }
+  .focus-line span { color: var(--lavender); }
+
+  .routine-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-top: 14px; }
+  .routine-box { padding: 14px; background: rgba(0,229,255,0.05); border-radius: 12px; border-left: 3px solid var(--lavender); }
+  .routine-box strong { color: var(--cyan); font-size: 0.9em; }
+  .routine-box p { margin-top: 8px; color: var(--muted); font-size: 0.9em; }
+
+  .habits-list { margin-left: 18px; color: var(--muted); line-height: 2; }
+  .goal-box { margin: 18px 0; padding: 18px; background: rgba(0,229,255,0.08); border-radius: 12px; border: 1px solid rgba(182,156,255,0.2); }
+  .goal-box h4 { color: var(--lavender); margin-bottom: 12px; }
+  .tip-box { margin-top: 18px; padding: 18px; background: rgba(182,156,255,0.1); border-radius: 12px; }
+  .tip-box p:first-child { color: var(--lavender); font-weight: 700; margin-bottom: 8px; }
+
+  .other-areas { background: rgba(182,156,255,0.1); padding: 26px; border-radius: 18px; margin: 22px 0; border: 2px solid var(--lavender); }
+  .other-areas h3 { color: var(--cyan); margin-bottom: 14px; }
+  .other-area-row { margin: 12px 0; padding: 14px; background: rgba(0,229,255,0.05); border-radius: 12px; }
+  .other-area-row strong { color: var(--lavender); }
+  .other-area-row .breakdown { font-size: 0.85em; color: var(--muted); margin-top: 6px; }
+
+  .closing { text-align: center; margin-top: 34px; padding: 28px; background: rgba(182,156,255,0.1); border-radius: 18px; }
+  .closing h3 { margin-bottom: 4px; }
+  .closing p { color: var(--muted); margin-top: 12px; }
+
+  .center-actions { display: flex; flex-direction: column; align-items: center; margin-top: 26px; }
+
+  /* === MG JOURNEY NAV === */
+  .mg-top-nav { max-width: 900px; margin: 0 auto 10px; padding: 0 4px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; width: 100%; }
+  .mg-top-nav a { color: var(--cyan); text-decoration: none; font-size: 0.82em; letter-spacing: 1px; opacity: 0.85; }
+  .mg-top-nav a:hover { opacity: 1; }
+  .mg-phase-tag { font-family: 'Cinzel', serif; font-size: 0.72em; letter-spacing: 3px; text-transform: uppercase; color: var(--lavender); opacity: 0.8; }
+  .mg-phase-footer { margin-top: 40px; padding-top: 24px; text-align: center; border-top: 1px solid rgba(182,156,255,0.15); }
+  .mg-phase-footer .mg-phase-track { font-family: 'Cinzel', serif; font-size: 0.8em; letter-spacing: 3px; color: var(--lavender); margin-bottom: 18px; opacity: 0.85; }
+  .mg-phase-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .mg-btn-ghost, .mg-btn-solid { display: inline-block; padding: 12px 28px; border-radius: 30px; font-size: 0.95em; text-decoration: none; letter-spacing: 1px; transition: all 0.3s ease; }
+  .mg-btn-ghost { border: 1px solid rgba(182,156,255,0.4); color: var(--lavender); background: transparent; }
+  .mg-btn-ghost:hover { background: rgba(182,156,255,0.1); }
+  .mg-btn-solid { border: 1px solid var(--cyan); color: #000; background: var(--cyan); font-weight: 600; box-shadow: 0 0 20px rgba(0,229,255,0.3); }
+  .mg-btn-solid:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,229,255,0.5); }
+</style>
+</head>
+<body>
+
+<div style="width:100%; max-width:900px;">
+  <div class="mg-top-nav">
+    <a href="index.html">← Volver al mapa</a>
+    <span class="mg-phase-tag">Fase 3 de 4 · Conecta</span>
+  </div>
+
+  <div class="shell">
+    <div class="credit">Diseñado por @melissagallegosg</div>
+
+    <div id="intro" class="fade-in">
+      <h1 class="gradient-text">🧭 Descubre tu Ikigai</h1>
+      <h3>¿Qué es el Ikigai?</h3>
+      <p>Ikigai es un concepto japonés que significa "razón de ser" o "propósito de vida". Es el punto de encuentro entre cuatro dimensiones fundamentales de tu existencia:</p>
+      <div class="dim-box">
+        <div class="dim-item"><strong>❤️ Lo que amas</strong> — Tu pasión y motivación intrínseca</div>
+        <div class="dim-item"><strong>🧠 En lo que eres buena/o</strong> — Tus talentos y habilidades naturales</div>
+        <div class="dim-item"><strong>🌍 Lo que el mundo necesita</strong> — Tu impacto y utilidad social</div>
+        <div class="dim-item"><strong>💰 Por lo que podrían pagarte</strong> — Tu potencial económico</div>
+      </div>
+      <h3>¿Por qué es importante conocerlo?</h3>
+      <p>Descubrir tu Ikigai te ayuda a alinear tu vida profesional y personal con tu propósito auténtico. Te permite tomar decisiones más conscientes, encontrar mayor satisfacción en tu trabajo y vivir con más plenitud y significado.</p>
+      <p class="italic-note">Este test identificará tus áreas de afinidad específicas y te dará un plan de acción concreto para integrar tu Ikigai en tu día a día.</p>
+      <button class="btn-primary" onclick="startTest()">Comenzar el Test</button>
+    </div>
+
+    <div id="test" class="fade-in" style="display:none;">
+      <div class="step-count" id="stepCount"></div>
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="step-header">
+        <h2 id="stepTitle"></h2>
+        <p id="stepDesc"></p>
+      </div>
+      <div class="step-body" id="stepBody"></div>
+      <div class="step-nav">
+        <button class="btn-secondary" id="prevBtn" onclick="goPrevious()">← Anterior</button>
+        <button class="btn-primary" id="nextBtn" onclick="goNext()" disabled>Siguiente →</button>
+      </div>
+    </div>
+
+    <div id="results" class="fade-in" style="display:none;"></div>
+  </div>
+</div>
+
+<script>
+  // --- Data ---
+  const areas = [
+    { id: "arte", name: "Arte y Creatividad", emoji: "🎨" },
+    { id: "tecnologia", name: "Tecnología", emoji: "💻" },
+    { id: "educacion", name: "Educación y Enseñanza", emoji: "📚" },
+    { id: "salud", name: "Salud y Bienestar", emoji: "🏥" },
+    { id: "negocios", name: "Negocios y Emprendimiento", emoji: "💼" },
+    { id: "deportes", name: "Deportes y Fitness", emoji: "⚽" },
+    { id: "comunicacion", name: "Comunicación y Medios", emoji: "📱" },
+    { id: "ciencia", name: "Ciencia e Investigación", emoji: "🔬" },
+    { id: "servicio", name: "Servicio Social", emoji: "🤝" },
+    { id: "naturaleza", name: "Naturaleza y Ambiente", emoji: "🌱" },
+    { id: "gastronomia", name: "Gastronomía", emoji: "🍳" },
+    { id: "escritura", name: "Escritura y Literatura", emoji: "✍️" }
+  ];
+
+  const testSteps = [
+    { type: "area_selection", title: "❤️ Paso 1: ¿Qué áreas te apasionan?", description: "Selecciona las 3 áreas que más te entusiasman (puedes seleccionar hasta 3)", maxSelections: 3 },
+    { type: "skills", title: "🧠 Paso 2: Tus talentos naturales", description: "Responde sobre tus habilidades en las áreas que seleccionaste", dimension: "skill", questionText: "Aprendo rápido nuevas habilidades en {area}" },
+    { type: "passion", title: "🔥 Paso 3: Tu motivación intrínseca", description: "Evalúa tu pasión por estas áreas", dimension: "love", questionText: "Pierdo la noción del tiempo cuando trabajo en {area}" },
+    { type: "impact", title: "🌍 Paso 4: Impacto social", description: "Piensa en cómo podrías ayudar a otros", dimension: "world", questionText: "Puedo resolver problemas reales con {area}" },
+    { type: "monetization", title: "💰 Paso 5: Potencial económico", description: "Evalúa las oportunidades de monetización", dimension: "money", questionText: "Existe demanda de mercado para {area}" }
+  ];
+
+  const scaleOptions = [
+    { text: "Totalmente en desacuerdo", value: 1 },
+    { text: "En desacuerdo", value: 2 },
+    { text: "Neutral", value: 3 },
+    { text: "De acuerdo", value: 4 },
+    { text: "Totalmente de acuerdo", value: 5 }
+  ];
+
+  // --- State ---
+  let currentStep = 0;
+  let currentAreaIndex = 0;
+  let selectedAreas = [];
+  let answers = { love: {}, skill: {}, world: {}, money: {} };
+  let currentAnswer = null;
+
+  function startTest() {
+    document.getElementById('intro').style.display = 'none';
+    document.getElementById('test').style.display = 'block';
+    currentStep = 0;
+    currentAreaIndex = 0;
+    renderStep();
+  }
+
+  function renderStep() {
+    const step = testSteps[currentStep];
+    const isAreaStep = step.type === 'area_selection';
+    const progress = ((currentStep + 1) / testSteps.length) * 100;
+
+    document.getElementById('stepCount').textContent = `Paso ${currentStep + 1} de ${testSteps.length}`;
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('stepTitle').textContent = step.title;
+    document.getElementById('stepDesc').textContent = step.description;
+
+    const body = document.getElementById('stepBody');
+    body.innerHTML = '';
+
+    if (isAreaStep) {
+      const grid = document.createElement('div');
+      grid.className = 'area-grid';
+      areas.forEach(area => {
+        const isSelected = selectedAreas.some(a => a.id === area.id);
+        const disabled = !isSelected && selectedAreas.length >= step.maxSelections;
+        const card = document.createElement('div');
+        card.className = 'area-card' + (isSelected ? ' selected' : '') + (disabled ? ' disabled' : '');
+        card.innerHTML = `<span class="emoji">${area.emoji}</span><strong>${area.name}</strong>`;
+        if (!disabled) card.onclick = () => toggleArea(area);
+        grid.appendChild(card);
+      });
+      body.appendChild(grid);
+    } else {
+      const area = selectedAreas[currentAreaIndex];
+      if (!area) return;
+      const qText = step.questionText.replace('{area}', area.name);
+      const wrap = document.createElement('div');
+      wrap.innerHTML = `<div class="area-name-tag">${area.emoji} ${area.name}</div><div class="likert-q">${qText}</div>`;
+      const optsWrap = document.createElement('div');
+      const savedVal = (answers[step.dimension][area.id] || [])[0] || null;
+      currentAnswer = savedVal;
+      scaleOptions.forEach(opt => {
+        const optDiv = document.createElement('div');
+        optDiv.className = 'likert-opt' + (savedVal === opt.value ? ' selected' : '');
+        optDiv.innerHTML = `<span class="likert-dot"></span><span>${opt.text}</span>`;
+        optDiv.onclick = () => selectLikert(opt.value, step.dimension, area.id);
+        optsWrap.appendChild(optDiv);
+      });
+      wrap.appendChild(optsWrap);
+      body.appendChild(wrap);
+    }
+
+    document.getElementById('prevBtn').style.visibility = (currentStep === 0 && currentAreaIndex === 0) ? 'hidden' : 'visible';
+    const canProceed = isAreaStep ? selectedAreas.length === step.maxSelections : currentAnswer !== null;
+    const nextBtn = document.getElementById('nextBtn');
+    nextBtn.disabled = !canProceed;
+    nextBtn.textContent = (currentStep === testSteps.length - 1 && currentAreaIndex === selectedAreas.length - 1) ? 'Ver resultados' : 'Siguiente →';
+  }
+
+  function toggleArea(area) {
+    const step = testSteps[0];
+    const exists = selectedAreas.find(a => a.id === area.id);
+    if (exists) {
+      selectedAreas = selectedAreas.filter(a => a.id !== area.id);
+    } else if (selectedAreas.length < step.maxSelections) {
+      selectedAreas.push(area);
+    }
+    renderStep();
+  }
+
+  function selectLikert(value, dimension, areaId) {
+    answers[dimension][areaId] = [value];
+    currentAnswer = value;
+    renderStep();
+  }
+
+  function goNext() {
+    const step = testSteps[currentStep];
+    if (step.type === 'area_selection') {
+      currentStep = 1;
+      currentAreaIndex = 0;
+      renderStep();
+      return;
+    }
+    const nextAreaIndex = currentAreaIndex + 1;
+    if (nextAreaIndex < selectedAreas.length) {
+      currentAreaIndex = nextAreaIndex;
+      renderStep();
+    } else {
+      const nextStep = currentStep + 1;
+      if (nextStep < testSteps.length) {
+        currentStep = nextStep;
+        currentAreaIndex = 0;
+        renderStep();
+      } else {
+        showResults();
+      }
+    }
+  }
+
+  function goPrevious() {
+    if (currentAreaIndex > 0) {
+      currentAreaIndex--;
+      renderStep();
+    } else if (currentStep > 0) {
+      currentStep--;
+      currentAreaIndex = testSteps[currentStep].type === 'area_selection' ? 0 : selectedAreas.length - 1;
+      renderStep();
+    }
+  }
+
+  // --- Scoring ---
+  function calculateAreaScores() {
+    return selectedAreas.map(area => {
+      const loveScore = (answers.love[area.id] || []).reduce((a, b) => a + b, 0) || 0;
+      const skillScore = (answers.skill[area.id] || []).reduce((a, b) => a + b, 0) || 0;
+      const worldScore = (answers.world[area.id] || []).reduce((a, b) => a + b, 0) || 0;
+      const moneyScore = (answers.money[area.id] || []).reduce((a, b) => a + b, 0) || 0;
+      return {
+        area, love: loveScore, skill: skillScore, world: worldScore, money: moneyScore,
+        total: loveScore + skillScore + worldScore + moneyScore,
+        balance: Math.min(loveScore, skillScore, worldScore, moneyScore)
+      };
+    });
+  }
+
+  function getWeakDimension(score) {
+    const { love, skill, world, money } = score;
+    const lowest = Math.min(love, skill, world, money);
+    if (lowest === love) return { dimension: "pasión", name: "amor" };
+    if (lowest === skill) return { dimension: "talento", name: "habilidad" };
+    if (lowest === world) return { dimension: "impacto social", name: "utilidad" };
+    return { dimension: "monetización", name: "ingresos" };
+  }
+
+  function getDailyPractices(score) {
+    const { area, love, skill, world, money } = score;
+    const lowest = Math.min(love, skill, world, money);
+    if (lowest === love) return [
+      `Dedica 30 minutos diarios a explorar aspectos de ${area.name} que te resulten más emocionantes`,
+      `Sigue a 3 personas inspiradoras en ${area.name} en redes sociales`,
+      `Únete a una comunidad online relacionada con ${area.name}`,
+      `Experimenta con diferentes sub-áreas dentro de ${area.name} hasta encontrar lo que más te apasione`
+    ];
+    if (lowest === skill) return [
+      `Practica habilidades de ${area.name} durante 45 minutos diarios`,
+      `Toma un curso online específico sobre ${area.name}`,
+      `Busca un mentor o alguien con experiencia en ${area.name}`,
+      `Crea pequeños proyectos para aplicar lo que aprendes en ${area.name}`
+    ];
+    if (lowest === world) return [
+      `Identifica 3 problemas reales que podrías resolver con ${area.name}`,
+      `Ofrece ayuda gratuita a alguien usando tus conocimientos de ${area.name}`,
+      `Comparte contenido educativo sobre ${area.name} en redes sociales`,
+      `Investiga organizaciones que trabajen en ${area.name} y cómo colaborar`
+    ];
+    return [
+      `Investiga cómo otros monetizan ${area.name}`,
+      `Crea un perfil profesional destacando tu expertise en ${area.name}`,
+      `Define un servicio o producto mínimo viable en ${area.name}`,
+      `Conecta con personas dispuestas a pagar por servicios de ${area.name}`
+    ];
+  }
+
+  function getFocusArea(score) {
+    const { love, skill, world, money } = score;
+    const lowest = Math.min(love, skill, world, money);
+    if (lowest === love) return "❤️ Aumentar tu Pasión";
+    if (lowest === skill) return "🧠 Desarrollar tu Talento";
+    if (lowest === world) return "🌍 Incrementar tu Impacto";
+    return "💰 Desarrollar tu Monetización";
+  }
+
+  function showResults() {
+    document.getElementById('test').style.display = 'none';
+    const scores = calculateAreaScores();
+    const sortedScores = scores.sort((a, b) => b.total - a.total);
+    const topArea = sortedScores[0];
+    const weak = getWeakDimension(topArea);
+    const practices = getDailyPractices(topArea);
+    const focus = getFocusArea(topArea);
+    const isActivated = topArea.balance >= 4;
+
+    let otherAreasHtml = '';
+    if (sortedScores.length > 1) {
+      otherAreasHtml = `
+        <div class="other-areas">
+          <h3>Tus otras áreas de interés</h3>
+          ${sortedScores.slice(1).map(score => `
+            <div class="other-area-row">
+              <strong>${score.area.emoji} ${score.area.name} - Puntaje total: ${score.total}/20</strong>
+              <div class="breakdown">❤️ Pasión: ${score.love} | 🧠 Talento: ${score.skill} | 🌍 Impacto: ${score.world} | 💰 Monetización: ${score.money}</div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    const analysisHtml = isActivated
+      ? `<p style="font-weight:700; color:#fff; margin-bottom:8px;">¡Ikigai Activado!</p>
+         <p style="color:var(--muted); line-height:1.7;">Tienes un excelente balance en todas las dimensiones de ${topArea.area.name}. Tu reto ahora es profundizar y expandir tu impacto. Estás listo/a para convertir esto en tu propósito de vida.</p>`
+      : `<p style="font-weight:700; color:#fff; margin-bottom:8px;">Ikigai en Desarrollo</p>
+         <p style="color:var(--muted); line-height:1.7;">Tu área de mayor oportunidad es <strong style="color:var(--cyan);">${weak.dimension}</strong>. Mientras tus otras dimensiones son sólidas, fortalecer tu ${weak.name} en ${topArea.area.name} te acercará significativamente a tu Ikigai pleno.</p>`;
+
+    document.getElementById('results').innerHTML = `
+      <h1 class="gradient-text">🎯 Tu Ikigai Personal</h1>
+
+      <div class="result-hero">
+        <div class="area-title">${topArea.area.emoji} ${topArea.area.name}</div>
+        <p>Esta es tu área de mayor potencial para desarrollar tu Ikigai</p>
+      </div>
+
+      <div class="result-card">
+        <h3>📊 Tus puntajes en ${topArea.area.name}</h3>
+        <div class="score-grid">
+          <div class="score-box"><div class="num">${topArea.love}</div><div class="lbl">❤️ Pasión</div></div>
+          <div class="score-box"><div class="num">${topArea.skill}</div><div class="lbl">🧠 Talento</div></div>
+          <div class="score-box"><div class="num">${topArea.world}</div><div class="lbl">🌍 Impacto</div></div>
+          <div class="score-box"><div class="num">${topArea.money}</div><div class="lbl">💰 Monetización</div></div>
+        </div>
+      </div>
+
+      <div class="result-card">
+        <h3>🔍 Análisis de tu Ikigai</h3>
+        ${analysisHtml}
+      </div>
+
+      <div class="plan-card">
+        <h3>🚀 Tu Plan de Acción Personalizado</h3>
+        <p class="focus-line"><strong>Enfoque Principal:</strong> <span>${focus}</span></p>
+
+        <div class="goal-box">
+          <h4>📅 Rutina Semanal para Activar tu Ikigai</h4>
+          <div class="routine-grid">
+            <div class="routine-box"><strong>🌅 Lunes - Miércoles - Viernes</strong><p>${practices[0]}</p></div>
+            <div class="routine-box"><strong>🌙 Martes - Jueves</strong><p>${practices[1]}</p></div>
+            <div class="routine-box"><strong>☀️ Fin de Semana</strong><p>${practices[2]}</p></div>
+          </div>
+        </div>
+
+        <div class="goal-box">
+          <h4>Hábitos Diarios (5-10 minutos)</h4>
+          <ul class="habits-list">
+            <li>Visualiza tu día ideal trabajando en ${topArea.area.name}</li>
+            <li>Anota una cosa que aprendiste hoy sobre ${topArea.area.name}</li>
+            <li>Conecta con alguien de tu red relacionado con ${topArea.area.name}</li>
+          </ul>
+        </div>
+
+        <div class="goal-box">
+          <h4>🎯 Meta a 30 días</h4>
+          <p style="color:var(--muted); line-height:1.7;">${practices[3]}</p>
+        </div>
+
+        <div class="tip-box">
+          <p>💡 Tip clave:</p>
+          <p style="color:var(--muted); line-height:1.7;">La consistencia supera la intensidad. Pequeñas acciones diarias construyen grandes transformaciones. Comprométete a seguir este plan durante 30 días y evalúa tu progreso.</p>
+        </div>
+      </div>
+
+      ${otherAreasHtml}
+
+      <div class="closing">
+        <h3 class="gradient-text">Tu Ikigai no se encuentra.</h3>
+        <h3 style="color:var(--cyan); margin-top:4px;">Se construye.</h3>
+        <p>Este es el primer paso de tu viaje hacia el propósito. Usa estos resultados como guía, no como destino final.</p>
+      </div>
+
+      <div class="center-actions">
+        <button class="btn-primary" onclick="restartIkigai()">🔄 Hacer el test nuevamente</button>
+      </div>
+
+      <div class="mg-phase-footer">
+        <div class="mg-phase-track">FASE 3 DE 4 · CONECTA</div>
+        <div class="mg-phase-actions">
+          <a href="index.html" class="mg-btn-ghost">Volver al mapa</a>
+          <a href="fase5-ejecuta.html" class="mg-btn-solid">Siguiente fase →</a>
+        </div>
+      </div>
+    `;
+    document.getElementById('results').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    try {
+      const store = JSON.parse(localStorage.getItem('mg_journey') || '{}');
+      store.fase3 = {
+        areaPrincipal: topArea.area.name,
+        puntajes: { pasion: topArea.love, talento: topArea.skill, impacto: topArea.world, monetizacion: topArea.money },
+        enfoque: focus,
+        activado: isActivated
+      };
+      localStorage.setItem('mg_journey', JSON.stringify(store));
+    } catch (e) {}
+  }
+
+  function restartIkigai() {
+    currentStep = 0;
+    currentAreaIndex = 0;
+    selectedAreas = [];
+    answers = { love: {}, skill: {}, world: {}, money: {} };
+    currentAnswer = null;
+    document.getElementById('results').style.display = 'none';
+    document.getElementById('intro').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
+</body>
+</html>

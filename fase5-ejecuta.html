@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Ritmo Beta™ - Test de Ejecución Sostenida</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+    <style>
+        h1, .archetype-title { font-family: 'Cinzel', serif; letter-spacing: 3px; }
+
+        .mg-top-nav {
+            max-width: 900px;
+            margin: 0 auto 10px;
+            padding: 10px 4px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .mg-top-nav a {
+            color: #D946EF;
+            text-decoration: none;
+            font-size: 0.82em;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+        .mg-top-nav a:hover { opacity: 1; }
+        .mg-phase-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.72em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #B69CFF;
+            opacity: 0.8;
+        }
+        .mg-phase-footer {
+            max-width: 900px;
+            margin: 50px auto 0;
+            padding: 30px 20px 10px;
+            text-align: center;
+            border-top: 1px solid rgba(217,70,239,0.15);
+        }
+        .mg-phase-footer .mg-phase-track {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8em;
+            letter-spacing: 3px;
+            color: #B69CFF;
+            margin-bottom: 18px;
+            opacity: 0.85;
+        }
+        .mg-phase-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .mg-btn-ghost, .mg-btn-solid {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 0.95em;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .mg-btn-ghost {
+            border: 1px solid rgba(182,156,255,0.4);
+            color: #B69CFF;
+            background: transparent;
+        }
+        .mg-btn-ghost:hover { background: rgba(182,156,255,0.1); }
+        .mg-btn-solid {
+            border: 1px solid #D946EF;
+            color: #000;
+            background: #D946EF;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(217,70,239,0.35);
+        }
+        .mg-btn-solid:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(217,70,239,0.55); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #050505;
+            color: #ffffff;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            border-bottom: 2px solid #D946EF;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #D946EF;
+            text-shadow: 0 0 20px rgba(255, 102, 0, 0.8),
+                         0 0 40px rgba(255, 102, 0, 0.4);
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            color: #ffffff;
+            font-style: italic;
+            margin-top: 15px;
+        }
+
+        /* Intro Section */
+        .intro {
+            background: linear-gradient(135deg, rgba(255, 102, 0, 0.05) 0%, rgba(0, 0, 0, 0) 100%);
+            border: 1px solid rgba(255, 102, 0, 0.2);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .intro p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        /* Test Container */
+        .test-container {
+            display: none;
+        }
+
+        .test-container.active {
+            display: block;
+        }
+
+        /* Question Card */
+        .question-card {
+            background: linear-gradient(135deg, rgba(255, 102, 0, 0.05) 0%, rgba(0, 0, 0, 0) 100%);
+            border: 2px solid rgba(255, 102, 0, 0.3);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(255, 102, 0, 0.1);
+        }
+
+        .question-number {
+            color: #D946EF;
+            font-size: 1em;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-shadow: 0 0 10px rgba(255, 102, 0, 0.6);
+        }
+
+        .question-text {
+            font-size: 1.5em;
+            color: #ffffff;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        /* Options */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option {
+            background: rgba(255, 102, 0, 0.05);
+            border: 2px solid rgba(255, 102, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .option:hover {
+            background: rgba(255, 102, 0, 0.15);
+            border-color: #D946EF;
+            transform: translateX(10px);
+            box-shadow: -5px 5px 20px rgba(255, 102, 0, 0.3);
+        }
+
+        .option.selected {
+            background: rgba(255, 102, 0, 0.2);
+            border-color: #D946EF;
+            box-shadow: 0 0 25px rgba(255, 102, 0, 0.4);
+        }
+
+        .option-text {
+            font-size: 1.1em;
+            color: #e0e0e0;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 40px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 102, 0, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(255, 102, 0, 0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #D946EF, #e35cf5);
+            width: 0%;
+            transition: width 0.5s ease;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.8);
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            color: #D946EF;
+            font-size: 0.9em;
+        }
+
+        /* Buttons */
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 15px;
+        }
+
+        .btn {
+            background: #D946EF;
+            color: #000000;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-family: 'Poppins', sans-serif;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+        }
+
+        .btn:hover {
+            background: #e35cf5;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 102, 0, 0.8);
+        }
+
+        .btn:disabled {
+            background: rgba(255, 102, 0, 0.3);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        .btn-start {
+            margin: 30px auto;
+            display: block;
+        }
+
+        /* Results Section */
+        .results-container {
+            display: none;
+            text-align: center;
+        }
+
+        .results-container.active {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .archetype-title {
+            font-size: 2.5em;
+            color: #D946EF;
+            text-shadow: 0 0 30px rgba(255, 102, 0, 0.8);
+            margin: 30px 0;
+        }
+
+        .archetype-description {
+            background: rgba(255, 102, 0, 0.1);
+            border: 2px solid #D946EF;
+            border-radius: 15px;
+            padding: 40px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .archetype-description h3 {
+            color: #D946EF;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 15px rgba(255, 102, 0, 0.6);
+        }
+
+        .archetype-description p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: #e0e0e0;
+        }
+
+        .characteristics {
+            margin-top: 30px;
+        }
+
+        .characteristics ul {
+            list-style: none;
+        }
+
+        .characteristics li {
+            padding: 10px 0;
+            font-size: 1.1em;
+            color: #e0e0e0;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .characteristics li:before {
+            content: "▸";
+            color: #D946EF;
+            font-size: 1.3em;
+            position: absolute;
+            left: 0;
+            text-shadow: 0 0 10px rgba(255, 102, 0, 0.8);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .question-text {
+                font-size: 1.2em;
+            }
+
+            .btn-container {
+                flex-direction: column;
+            }
+
+            .option {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="mg-top-nav">
+        <a href="index.html">← Volver al mapa</a>
+        <span class="mg-phase-tag">Fase 4 de 4 · Ejecuta</span>
+    </div>
+    <div class="container">
+        <header>
+            <h1>MÉTODO RITMO BETA™</h1>
+            <p class="subtitle">Test de Diagnóstico de Ejecución Sostenida</p>
+        </header>
+
+        <!-- Designer Credit -->
+        <div style="text-align: right; margin-bottom: 20px; color: #D946EF; font-size: 0.9em; font-style: italic;">
+            diseñado por @melissagallegosg
+        </div>
+
+        <!-- Intro -->
+        <div class="intro" id="intro">
+            <p>Este test identifica tu patrón operativo interno de ejecución.</p>
+            <p>Responde con honestidad para obtener resultados precisos sobre cómo sostienes tareas, proyectos y objetivos en el tiempo.</p>
+            <p style="color: #D946EF; font-weight: bold; margin-top: 20px;">15 preguntas · 5 minutos</p>
+            <button class="btn btn-start" onclick="startTest()">INICIAR TEST</button>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-container" id="progress-container" style="display: none;">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="progress-text" id="progress-text">Pregunta 1 de 15</div>
+        </div>
+
+        <!-- Test Container -->
+        <div class="test-container" id="test-container">
+            <div class="question-card">
+                <div class="question-number" id="question-number">PREGUNTA 1/15</div>
+                <div class="question-text" id="question-text"></div>
+                <div class="options" id="options"></div>
+            </div>
+
+            <div class="btn-container">
+                <button class="btn" id="prev-btn" onclick="previousQuestion()" style="display: none;">ANTERIOR</button>
+                <button class="btn" id="next-btn" onclick="nextQuestion()" disabled>SIGUIENTE</button>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div class="results-container" id="results-container">
+            <h2 class="archetype-title" id="archetype-title"></h2>
+            <div class="archetype-description" id="archetype-description"></div>
+            <button class="btn btn-start" onclick="restartTest()">REALIZAR TEST NUEVAMENTE</button>
+
+            <div class="mg-phase-footer">
+                <div class="mg-phase-track">FASE 4 DE 4 · EJECUTA</div>
+                <div class="mg-phase-actions">
+                    <a href="index.html" class="mg-btn-ghost">Volver al mapa</a>
+                    <a href="resumen.html" class="mg-btn-solid">Ver mi resumen →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                text: "Cuando empiezas un proyecto nuevo, ¿qué ocurre habitualmente?",
+                options: [
+                    { text: "Arranco con mucha energía, pero me cuesta mantenerla después", archetype: "iniciador_intenso" },
+                    { text: "Comienzo de forma constante y sostengo el ritmo sin problema", archetype: "sostenedor_constante" },
+                    { text: "Arranco bien, pero pierdo foco cuando surgen ideas nuevas", archetype: "disperso_creativo" },
+                    { text: "Tardo en empezar porque necesito analizar todo primero", archetype: "bloqueador_analitico" }
+                ]
+            },
+            {
+                text: "Cuando llevas varios días trabajando en algo repetitivo, ¿cómo te sientes?",
+                options: [
+                    { text: "Me aburro y busco algo más estimulante", archetype: "disperso_creativo" },
+                    { text: "Lo mantengo sin problema, la constancia no me afecta", archetype: "sostenedor_constante" },
+                    { text: "Trabajo por rachas: algunos días bien, otros muy mal", archetype: "ejecutor_intermitente" },
+                    { text: "Siento que me drena la energía progresivamente", archetype: "colapsador_energetico" }
+                ]
+            },
+            {
+                text: "¿Qué pasa cuando un proyecto se alarga más de lo previsto?",
+                options: [
+                    { text: "Pierdo interés y busco excusas para abandonar", archetype: "iniciador_intenso" },
+                    { text: "Ajusto mi estrategia y sigo adelante sin drama", archetype: "sostenedor_constante" },
+                    { text: "Me frustro, reviso todo y a veces me bloqueo", archetype: "bloqueador_analitico" },
+                    { text: "Alterno entre días productivos y días de parálisis", archetype: "ejecutor_intermitente" }
+                ]
+            },
+            {
+                text: "¿Cómo describes tu nivel de energía durante una jornada de trabajo?",
+                options: [
+                    { text: "Explosivo al inicio, decae rápidamente", archetype: "iniciador_intenso" },
+                    { text: "Estable durante todo el día", archetype: "sostenedor_constante" },
+                    { text: "Variable: depende del día o de mi estado mental", archetype: "ejecutor_intermitente" },
+                    { text: "Voy perdiendo fuerza conforme avanzan las horas", archetype: "colapsador_energetico" }
+                ]
+            },
+            {
+                text: "Cuando aparece un obstáculo inesperado, ¿cuál es tu reacción típica?",
+                options: [
+                    { text: "Me frustro y pierdo momentum fácilmente", archetype: "iniciador_intenso" },
+                    { text: "Lo resuelvo y continúo sin afectarme mucho", archetype: "sostenedor_constante" },
+                    { text: "Me desvío explorando soluciones creativas y pierdo el foco", archetype: "disperso_creativo" },
+                    { text: "Me paralizo analizando todas las variables", archetype: "bloqueador_analitico" }
+                ]
+            },
+            {
+                text: "¿Con qué frecuencia terminas los proyectos que inicias?",
+                options: [
+                    { text: "Pocas veces, suelo dejarlos incompletos", archetype: "disperso_creativo" },
+                    { text: "Casi siempre los termino", archetype: "sostenedor_constante" },
+                    { text: "Depende: algunos sí, otros no", archetype: "ejecutor_intermitente" },
+                    { text: "Me cuesta finalizarlos, me quedo sin energía al final", archetype: "colapsador_energetico" }
+                ]
+            },
+            {
+                text: "¿Cómo manejas múltiples tareas simultáneas?",
+                options: [
+                    { text: "Salto de una a otra con facilidad, pero termino pocas", archetype: "disperso_creativo" },
+                    { text: "Priorizo y completo una antes de pasar a la siguiente", archetype: "sostenedor_constante" },
+                    { text: "Empiezo varias con entusiasmo, pero luego me estanco", archetype: "iniciador_intenso" },
+                    { text: "Me siento abrumado y tardo mucho en decidir por dónde empezar", archetype: "bloqueador_analitico" }
+                ]
+            },
+            {
+                text: "Cuando te sientes mentalmente saturado, ¿qué haces?",
+                options: [
+                    { text: "Abandono y busco algo completamente diferente", archetype: "disperso_creativo" },
+                    { text: "Hago una pausa corta y retomo con la misma energía", archetype: "sostenedor_constante" },
+                    { text: "Me fuerzo a continuar aunque baje mi rendimiento", archetype: "colapsador_energetico" },
+                    { text: "Me bloqueo y no puedo avanzar hasta que aclaro mi mente", archetype: "bloqueador_analitico" }
+                ]
+            },
+            {
+                text: "¿Qué tan importante es para ti la variedad en tus tareas?",
+                options: [
+                    { text: "Imprescindible, necesito cambios constantes", archetype: "disperso_creativo" },
+                    { text: "No me afecta, puedo con rutinas largas sin problema", archetype: "sostenedor_constante" },
+                    { text: "Prefiero cierta variedad, pero no es determinante", archetype: "ejecutor_intermitente" },
+                    { text: "Me gusta lo previsible, los cambios me desestabilizan", archetype: "bloqueador_analitico" }
+                ]
+            },
+            {
+                text: "¿Cómo reaccionas ante plazos ajustados?",
+                options: [
+                    { text: "Funciono mejor bajo presión, es mi mejor momento", archetype: "iniciador_intenso" },
+                    { text: "Mantengo la calma y organizo mi tiempo eficientemente", archetype: "sostenedor_constante" },
+                    { text: "Me estreso y mi desempeño se vuelve irregular", archetype: "ejecutor_intermitente" },
+                    { text: "Me bloqueo, necesito tiempo para procesar", archetype: "bloqueador_analitico" }
+                ]
+            },
+            {
+                text: "¿Qué describe mejor tu forma de trabajar?",
+                options: [
+                    { text: "Intenso y rápido en sprints cortos", archetype: "iniciador_intenso" },
+                    { text: "Constante, moderado, sin grandes altibajos", archetype: "sostenedor_constante" },
+                    { text: "Por impulsos: a veces muy productivo, a veces nada", archetype: "ejecutor_intermitente" },
+                    { text: "Lento pero meticuloso, hasta que me saturo", archetype: "bloqueador_analitico" }
+                ]
+            },
+            {
+                text: "¿Qué ocurre cuando pierdes el interés en algo?",
+                options: [
+                    { text: "Lo abandono rápidamente sin culpa", archetype: "disperso_creativo" },
+                    { text: "Busco formas de recuperar la motivación y continúo", archetype: "sostenedor_constante" },
+                    { text: "Sigo por compromiso pero con mucho menos energía", archetype: "colapsador_energetico" },
+                    { text: "Lo postergo indefinidamente mientras lo pienso", archetype: "bloqueador_analitico" }
+                ]
+            },
+            {
+                text: "¿Cómo te afecta recibir retroalimentación negativa?",
+                options: [
+                    { text: "Pierdo motivación y me desconecto del proyecto", archetype: "iniciador_intenso" },
+                    { text: "La proceso, ajusto y sigo adelante", archetype: "sostenedor_constante" },
+                    { text: "Me hace dudar de todo y entro en parálisis por análisis", archetype: "bloqueador_analitico" },
+                    { text: "Afecta mi rendimiento por días", archetype: "colapsador_energetico" }
+                ]
+            },
+            {
+                text: "¿Cómo describes tu patrón de finalización de tareas?",
+                options: [
+                    { text: "Empiezo muchas, termino pocas", archetype: "disperso_creativo" },
+                    { text: "Termino la mayoría de lo que empiezo", archetype: "sostenedor_constante" },
+                    { text: "Finalizo en rachas: a veces sí, a veces abandono", archetype: "ejecutor_intermitente" },
+                    { text: "Me cuesta llegar al final, me agoto antes", archetype: "colapsador_energetico" }
+                ]
+            },
+            {
+                text: "¿Qué necesitas para mantener tu productividad alta?",
+                options: [
+                    { text: "Novedad, retos nuevos, estímulos constantes", archetype: "disperso_creativo" },
+                    { text: "Claridad de objetivos y rutina establecida", archetype: "sostenedor_constante" },
+                    { text: "Presión externa o deadlines inminentes", archetype: "iniciador_intenso" },
+                    { text: "Tiempo para pensar y planificar sin presión", archetype: "bloqueador_analitico" }
+                ]
+            }
+        ];
+
+        const archetypes = {
+            iniciador_intenso: {
+                title: "INICIADOR INTENSO",
+                description: "Tu patrón operativo se caracteriza por arranques explosivos de energía y productividad, pero con dificultad para sostener ese nivel en el tiempo.",
+                characteristics: [
+                    "Empiezas proyectos con gran entusiasmo y velocidad",
+                    "Tu mejor momento es el inicio, cuando todo es nuevo",
+                    "Pierdes momentum cuando la novedad desaparece",
+                    "Funcionas mejor bajo presión o deadlines cercanos",
+                    "Tiendes a acumular proyectos sin terminar"
+                ],
+                strengths: "Excelente para lanzamientos, arranques de proyectos y situaciones que requieren energía concentrada en períodos cortos.",
+                risks: "Abandono prematuro, falta de seguimiento, acumulación de tareas incompletas.",
+                recommendation: "Necesitas sistemas externos de accountability y ciclos de trabajo cortos con recompensas frecuentes.",
+                techniques: [
+                    "Técnica del Sprint Fraccionado: Divide proyectos largos en mini-sprints de 3-5 días con recompensas al finalizar cada uno",
+                    "Sistema de Accountability Externo: Reporta avances diarios a un compañero, coach o líder para mantener compromiso",
+                    "Gamificación Personal: Convierte tareas en puntos/niveles con premios reales al alcanzar metas intermedias",
+                    "Método de Renovación de Novedad: Cada semana cambia un elemento del proyecto (entorno, horario, enfoque) para mantener frescura",
+                    "Deadline Artificiales Semanales: Crea fechas límite ficticias cada 7 días para activar tu respuesta a presión",
+                    "Rotación de Proyectos Controlada: Trabaja máximo en 2 proyectos alternados, pero con regla de completar uno antes de iniciar otro",
+                    "Ritual de Cierre Diario: 5 minutos al final del día para registrar progreso visible y celebrar pequeños logros"
+                ]
+            },
+            sostenedor_constante: {
+                title: "SOSTENEDOR CONSTANTE",
+                description: "Tu sistema operativo está optimizado para la ejecución sostenida. Mantienes un ritmo estable y predecible sin grandes altibajos.",
+                characteristics: [
+                    "Nivel de energía consistente durante el día",
+                    "Completas la mayoría de lo que inicias",
+                    "No te afectan las rutinas largas",
+                    "Manejas bien la presión sin desestabilizarte",
+                    "Eres confiable para proyectos de largo plazo"
+                ],
+                strengths: "Perfecto para roles que requieren constancia, disciplina y capacidad de mantener resultados en el tiempo.",
+                risks: "Puede faltarte flexibilidad ante cambios bruscos o creatividad ante problemas nuevos.",
+                recommendation: "Aprovecha tu estabilidad asumiendo proyectos de largo alcance y liderando equipos que necesiten consistencia.",
+                techniques: [
+                    "Expansión de Capacidad: Incrementa gradualmente la complejidad de tus proyectos para evitar estancamiento",
+                    "Inyección de Innovación Programada: Dedica 10% de tu tiempo semanal a experimentar con métodos nuevos",
+                    "Mentoría Inversa: Trabaja con perfiles creativos/dispersos para absorber flexibilidad sin perder tu estructura",
+                    "Sistema de Optimización Continua: Cada mes identifica un proceso rutinario y mejóralo 5%",
+                    "Zona de Incomodidad Controlada: Una vez al mes enfrenta un proyecto fuera de tu área de dominio",
+                    "Registro de Patrones de Éxito: Documenta qué estrategias funcionan para replicarlas conscientemente",
+                    "Red de Valor Agregado: Ofrece tu constancia a cambio de aprender habilidades complementarias de otros"
+                ]
+            },
+            ejecutor_intermitente: {
+                title: "EJECUTOR INTERMITENTE",
+                description: "Tu patrón muestra fluctuaciones marcadas: días de alta productividad alternados con días de bajo rendimiento o parálisis.",
+                characteristics: [
+                    "Tu productividad varía significativamente día a día",
+                    "Alternas entre rachas muy productivas y otras de estancamiento",
+                    "Tu rendimiento depende de tu estado mental",
+                    "Algunos proyectos los terminas, otros los abandonas",
+                    "Necesitas momentum externo para retomar el ritmo"
+                ],
+                strengths: "En tus mejores días puedes ser extremadamente productivo y eficiente.",
+                risks: "Impredecibilidad, dificultad para comprometerse con plazos fijos, frustración por la inconsistencia.",
+                recommendation: "Requieres estructura externa, seguimiento cercano y estrategias para estabilizar tu energía mental.",
+                techniques: [
+                    "Método de Días de Energía: Clasifica cada mañana tu nivel energético (alto/medio/bajo) y asigna tareas acordes",
+                    "Banco de Tareas por Nivel: Mantén 3 listas separadas de tareas según energía requerida para ejecutarlas",
+                    "Protocolo de Rescate: Cuando detectes día bajo, activa rutina mínima predefinida (3 tareas micro)",
+                    "Tracking de Patrones: Registra durante 30 días qué días eres productivo para identificar ciclos (sueño, alimentación, ejercicio)",
+                    "Sistema de Momentum Artificial: En días bajos, haz 1 tarea pequeña para activar dopamina y desbloquear",
+                    "Red de Apoyo Programada: Sesiones semanales de check-in con accountability partner",
+                    "Flexibilidad Estructurada: Planifica semanas con 60% tareas obligatorias y 40% buffer para días bajos",
+                    "Ritual de Activación Matutina: 10 minutos de rutina fija (ejercicio/meditación) para estabilizar estado mental"
+                ]
+            },
+            disperso_creativo: {
+                title: "DISPERSO CREATIVO",
+                description: "Tu mente opera en modo exploratorio constante. Necesitas variedad y novedad, pero esto fragmenta tu capacidad de finalización.",
+                characteristics: [
+                    "Generas muchas ideas y proyectos simultáneamente",
+                    "Saltas de una tarea a otra con facilidad",
+                    "Te aburres con rapidez en tareas repetitivas",
+                    "La monotonía es tu mayor enemigo",
+                    "Terminas pocos de los proyectos que inicias"
+                ],
+                strengths: "Excelente para brainstorming, innovación, resolución creativa de problemas y generación de ideas.",
+                risks: "Abandono crónico, falta de profundidad, dificultad para ejecutar hasta el final.",
+                recommendation: "Necesitas asociarte con perfiles de sostenimiento o delegar la ejecución después de la fase creativa.",
+                techniques: [
+                    "Regla del 1-3-1: 1 proyecto principal, máximo 3 secundarios, 1 idea nueva por semana (las demás al 'banco de ideas')",
+                    "Método de Cierre Forzado: Define criterio mínimo viable de 'completado' y cierra proyectos aunque no sean perfectos",
+                    "Rotación Creativa Estructurada: 90 minutos enfocado, 15 minutos libre para explorar, vuelta al proyecto principal",
+                    "Socio de Ejecución: Asociarte con un Sostenedor Constante que complete lo que tú inicias",
+                    "Time-Boxing Creativo: Asigna tiempo limitado a fase exploratoria (20% del proyecto), forzar cierre e ir a ejecución",
+                    "Sistema de Captura Rápida: Anota ideas nuevas en 2 minutos y retoma tarea actual (revisión semanal de ideas)",
+                    "Gamificación de Finalización: Puntos dobles por proyectos terminados vs proyectos iniciados",
+                    "Entorno Variable: Cambia de lugar de trabajo cada día pero mantén el mismo proyecto durante la semana"
+                ]
+            },
+            bloqueador_analitico: {
+                title: "BLOQUEADOR ANALÍTICO",
+                description: "Tu patrón operativo prioriza el análisis profundo sobre la acción rápida, lo que genera parálisis por exceso de procesamiento.",
+                characteristics: [
+                    "Necesitas analizar todo antes de actuar",
+                    "Los cambios imprevistos te desestabilizan",
+                    "Tiendes a postergar por sobre-análisis",
+                    "Valoras la precisión sobre la velocidad",
+                    "Te bloqueas cuando hay demasiadas variables"
+                ],
+                strengths: "Excelente para roles que requieren precisión, planificación estratégica y toma de decisiones complejas.",
+                risks: "Lentitud de ejecución, parálisis por análisis, dificultad para actuar bajo incertidumbre.",
+                recommendation: "Requieres plazos definidos, toma de decisiones progresiva y entornos con baja ambigüedad.",
+                techniques: [
+                    "Regla 70/30: Cuando tengas 70% de información, decide y actúa (no esperes el 100%)",
+                    "Time-Boxing de Análisis: Máximo 25% del tiempo total del proyecto para análisis, resto para ejecución",
+                    "Método de Decisión Reversible: Clasifica decisiones en reversibles e irreversibles; actúa rápido en reversibles",
+                    "Protocolo de 3 Opciones: Limita análisis a máximo 3 alternativas, elimina el resto inmediatamente",
+                    "Deadline de Análisis: Fecha límite externa para terminar fase de investigación y forzar paso a acción",
+                    "Método de Prototipado Rápido: Crea versión imperfecta en 20% del tiempo, itera después",
+                    "Criterios de Decisión Predefinidos: Lista de 5 factores máximos para evaluar opciones (ignorar el resto)",
+                    "Socio de Acción: Trabaja con un Iniciador Intenso que te empuje a ejecutar mientras tú aportas estrategia"
+                ]
+            },
+            colapsador_energetico: {
+                title: "COLAPSADOR ENERGÉTICO",
+                description: "Tu sistema mental consume energía más rápido de lo que la regenera, llevándote al agotamiento progresivo durante tareas sostenidas.",
+                characteristics: [
+                    "Empiezas bien pero tu energía decrece con el tiempo",
+                    "Te cuesta finalizar proyectos largos",
+                    "La saturación mental te afecta profundamente",
+                    "Necesitas pausas frecuentes para recuperarte",
+                    "El esfuerzo sostenido te drena rápidamente"
+                ],
+                strengths: "Buen desempeño en tareas de corta duración o con pausas integradas.",
+                risks: "Burnout, abandono por agotamiento, bajo rendimiento en maratones largos.",
+                recommendation: "Necesitas ciclos de trabajo fraccionados, gestión de energía consciente y pausas estructuradas obligatorias.",
+                techniques: [
+                    "Técnica Pomodoro Adaptada: 25 min trabajo intenso, 10 min pausa obligatoria (no negociable)",
+                    "Método de Ciclos Energéticos: Divide día en bloques: 2h trabajo, 30min recuperación real (no pantallas)",
+                    "Auditoría de Vampiros Energéticos: Identifica qué tareas te drenan más y rediseña/delega/elimina",
+                    "Protocolo de Recuperación Activa: Pausas con actividad física ligera (caminar 10 min) en vez de scroll pasivo",
+                    "Sistema de Carga Nocturna: Rutina de desconexión 2h antes de dormir para regeneración profunda",
+                    "Método de Tareas por Demanda Cognitiva: Clasifica actividades por consumo energético y distribuye estratégicamente",
+                    "Límite de Horas Productivas: Máximo 5 horas de trabajo cognitivo intenso al día, resto en tareas mecánicas",
+                    "Ritmo de Tortuga Sostenible: Reducir velocidad 30% pero mantener constancia sin colapso",
+                    "Suplementación Estratégica: Evaluar niveles de vitaminas, hidratación, sueño con profesional de salud"
+                ]
+            }
+        };
+
+        let currentQuestion = 0;
+        let answers = {};
+        let selectedOption = null;
+
+        function startTest() {
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('progress-container').style.display = 'block';
+            document.getElementById('test-container').classList.add('active');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('question-number').textContent = `PREGUNTA ${currentQuestion + 1}/15`;
+            document.getElementById('question-text').textContent = question.text;
+            
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionDiv = document.createElement('div');
+                optionDiv.className = 'option';
+                optionDiv.innerHTML = `<div class="option-text">${option.text}</div>`;
+                
+                if (answers[currentQuestion] === index) {
+                    optionDiv.classList.add('selected');
+                }
+                
+                optionDiv.onclick = () => selectOption(index, optionDiv);
+                optionsContainer.appendChild(optionDiv);
+            });
+
+            updateProgress();
+            updateButtons();
+        }
+
+        function selectOption(index, element) {
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            answers[currentQuestion] = index;
+            selectedOption = index;
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        function nextQuestion() {
+            if (selectedOption === null) return;
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                selectedOption = answers[currentQuestion] !== undefined ? answers[currentQuestion] : null;
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                selectedOption = answers[currentQuestion];
+                loadQuestion();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+            document.getElementById('progress-text').textContent = `Pregunta ${currentQuestion + 1} de ${questions.length}`;
+        }
+
+        function updateButtons() {
+            document.getElementById('prev-btn').style.display = currentQuestion > 0 ? 'block' : 'none';
+            document.getElementById('next-btn').textContent = currentQuestion === questions.length - 1 ? 'VER RESULTADOS' : 'SIGUIENTE';
+            document.getElementById('next-btn').disabled = selectedOption === null;
+        }
+
+        function calculateArchetype() {
+            const archetypeScores = {};
+            
+            Object.keys(answers).forEach(questionIndex => {
+                const answerIndex = answers[questionIndex];
+                const archetype = questions[questionIndex].options[answerIndex].archetype;
+                archetypeScores[archetype] = (archetypeScores[archetype] || 0) + 1;
+            });
+
+            let maxScore = 0;
+            let dominantArchetype = '';
+            
+            Object.keys(archetypeScores).forEach(archetype => {
+                if (archetypeScores[archetype] > maxScore) {
+                    maxScore = archetypeScores[archetype];
+                    dominantArchetype = archetype;
+                }
+            });
+
+            return dominantArchetype;
+        }
+
+        function showResults() {
+            const archetype = calculateArchetype();
+            const result = archetypes[archetype];
+
+            document.getElementById('test-container').classList.remove('active');
+            document.getElementById('progress-container').style.display = 'none';
+            
+            document.getElementById('archetype-title').textContent = result.title;
+            
+            const descriptionHTML = `
+                <h3>Tu Patrón de Ejecución</h3>
+                <p>${result.description}</p>
+                
+                <div class="characteristics">
+                    <h3>Características Principales</h3>
+                    <ul>
+                        ${result.characteristics.map(char => `<li>${char}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <h3>Fortalezas</h3>
+                <p>${result.strengths}</p>
+
+                <h3>Riesgos de Abandono</h3>
+                <p>${result.risks}</p>
+
+                <h3>Recomendación Estratégica</h3>
+                <p>${result.recommendation}</p>
+
+                <div class="characteristics" style="margin-top: 40px; background: rgba(255, 102, 0, 0.05); padding: 25px; border-radius: 10px; border: 1px solid rgba(255, 102, 0, 0.3);">
+                    <h3 style="color: #D946EF; text-shadow: 0 0 15px rgba(255, 102, 0, 0.8);">🎯 Técnicas para Mejorar tu Desempeño</h3>
+                    <ul>
+                        ${result.techniques.map(tech => `<li>${tech}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+            
+            document.getElementById('archetype-description').innerHTML = descriptionHTML;
+            document.getElementById('results-container').classList.add('active');
+
+            try {
+                const store = JSON.parse(localStorage.getItem('mg_journey') || '{}');
+                store.fase5 = {
+                    patronEjecucion: result.title,
+                    descripcion: result.description
+                };
+                localStorage.setItem('mg_journey', JSON.stringify(store));
+            } catch (e) {}
+        }
+
+        function restartTest() {
+            currentQuestion = 0;
+            answers = {};
+            selectedOption = null;
+            
+            document.getElementById('results-container').classList.remove('active');
+            document.getElementById('intro').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

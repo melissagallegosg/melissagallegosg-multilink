@@ -1,0 +1,1383 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método Ritmo Alfa™ - Test de Arquetipos</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Poppins:wght@300;400;500;600&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+    <style>
+        h1, .result-title { font-family: 'Cinzel', serif; letter-spacing: 4px; }
+
+        /* === MG JOURNEY NAV === */
+        .mg-top-nav {
+            max-width: 900px;
+            margin: 0 auto 10px;
+            padding: 10px 4px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .mg-top-nav a {
+            color: #00E5FF;
+            text-decoration: none;
+            font-size: 0.82em;
+            letter-spacing: 1px;
+            opacity: 0.85;
+            transition: opacity 0.3s ease;
+        }
+        .mg-top-nav a:hover { opacity: 1; }
+        .mg-phase-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 0.72em;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #B69CFF;
+            opacity: 0.8;
+        }
+        .mg-phase-footer {
+            max-width: 900px;
+            margin: 60px auto 0;
+            padding: 30px 20px 10px;
+            text-align: center;
+            border-top: 1px solid rgba(182,156,255,0.15);
+        }
+        .mg-phase-footer .mg-phase-track {
+            font-family: 'Cinzel', serif;
+            font-size: 0.8em;
+            letter-spacing: 3px;
+            color: #B69CFF;
+            margin-bottom: 18px;
+            opacity: 0.85;
+        }
+        .mg-phase-actions {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+        .mg-btn-ghost, .mg-btn-solid {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-size: 0.95em;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+        .mg-btn-ghost {
+            border: 1px solid rgba(182,156,255,0.4);
+            color: #B69CFF;
+            background: transparent;
+        }
+        .mg-btn-ghost:hover { background: rgba(182,156,255,0.1); }
+        .mg-btn-solid {
+            border: 1px solid #00E5FF;
+            color: #000;
+            background: #00E5FF;
+            font-weight: 600;
+            box-shadow: 0 0 20px rgba(0,229,255,0.3);
+        }
+        .mg-btn-solid:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(0,229,255,0.5); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #050505;
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        @keyframes glow {
+            0%, 100% { text-shadow: 0 0 10px #00E5FF, 0 0 20px #00E5FF, 0 0 30px #00E5FF; }
+            50% { text-shadow: 0 0 20px #00E5FF, 0 0 40px #00E5FF, 0 0 60px #00E5FF; }
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { box-shadow: 0 0 10px #00E5FF, 0 0 20px #00E5FF, 0 0 30px #00E5FF; }
+            50% { box-shadow: 0 0 20px #00E5FF, 0 0 40px #00E5FF, 0 0 60px #00E5FF; }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px;
+            background: rgba(0, 245, 255, 0.05);
+            border: 2px solid #00E5FF;
+            border-radius: 20px;
+            animation: neonPulse 3s infinite;
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #00E5FF;
+            animation: glow 2s infinite;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            color: #B69CFF;
+            margin-top: 10px;
+        }
+
+        .intro {
+            background: rgba(177, 156, 217, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #B69CFF;
+            margin-bottom: 40px;
+            line-height: 1.8;
+        }
+
+        .question-container {
+            background: rgba(0, 245, 255, 0.05);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            border: 1px solid #00E5FF;
+            transition: all 0.3s ease;
+        }
+
+        .question-container:hover {
+            background: rgba(0, 245, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .question-number {
+            color: #00E5FF;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .scale-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .scale-option {
+            flex: 1;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .scale-option input[type="radio"] {
+            display: none;
+        }
+
+        .scale-option label {
+            display: block;
+            padding: 15px;
+            background: rgba(177, 156, 217, 0.2);
+            border: 2px solid #B69CFF;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.1em;
+        }
+
+        .scale-option label:hover {
+            background: rgba(177, 156, 217, 0.4);
+            transform: scale(1.05);
+        }
+
+        .scale-option input[type="radio"]:checked + label {
+            background: #00E5FF;
+            color: #000;
+            border-color: #00E5FF;
+            box-shadow: 0 0 20px #00E5FF;
+            font-weight: bold;
+        }
+
+        .scale-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #B69CFF;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px 40px;
+            font-size: 1.5em;
+            background: linear-gradient(45deg, #00E5FF, #B69CFF);
+            color: #000;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            animation: neonPulse 2s infinite;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px #00E5FF;
+        }
+
+        .result-container {
+            display: none;
+            background: rgba(0, 245, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #00E5FF;
+            margin-top: 50px;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .result-title {
+            font-size: 2.5em;
+            color: #00E5FF;
+            text-align: center;
+            margin-bottom: 30px;
+            animation: glow 2s infinite;
+        }
+
+        .result-section {
+            background: rgba(177, 156, 217, 0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            border-left: 4px solid #B69CFF;
+        }
+
+        .result-section h3 {
+            color: #00E5FF;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .result-section p, .result-section li {
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .result-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .result-section li::before {
+            content: "→ ";
+            color: #00E5FF;
+            font-weight: bold;
+        }
+
+        .mantra {
+            background: linear-gradient(45deg, rgba(0, 245, 255, 0.2), rgba(177, 156, 217, 0.2));
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 1.5em;
+            font-style: italic;
+            color: #00E5FF;
+            margin: 30px 0;
+            border: 2px solid #00E5FF;
+            animation: neonPulse 3s infinite;
+        }
+
+        .archetype-icon {
+            font-size: 4em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: rgba(177, 156, 217, 0.2);
+            border-radius: 10px;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #00E5FF, #B69CFF);
+            width: 0%;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 10px #00E5FF;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .scale-container {
+                flex-direction: column;
+            }
+
+            .scale-option {
+                min-width: 100%;
+            }
+        }
+
+        .secondary-expand {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: rgba(177, 156, 217, 0.3);
+            border: 2px solid #B69CFF;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .secondary-expand:hover {
+            background: rgba(177, 156, 217, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .secondary-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            margin-top: 20px;
+        }
+
+        .secondary-content.expanded {
+            max-height: 2000px;
+        }
+
+        .author-credit {
+            text-align: right;
+            color: #B69CFF;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="mg-top-nav">
+        <a href="index.html">← Volver al mapa</a>
+        <span class="mg-phase-tag">Fase 1 de 4 · Identifica</span>
+    </div>
+    <div class="container">
+        <div class="author-credit">Diseñado por @melissagallegosg</div>
+        <div class="header">
+            <h1>✨ Método Ritmo Alfa™ ✨</h1>
+            <div class="subtitle">Sistema de Coherencia y Sostén Interno</div>
+        </div>
+
+        <div class="intro">
+            <h2 style="color: #00E5FF; margin-bottom: 20px;">¿Cuál es tu Arquetipo del No-Sostener?</h2>
+            <p>Este test identifica los patrones neuroconductuales que influyen en tu capacidad de sostener proyectos, hábitos y metas en el tiempo.</p>
+            <p style="margin-top: 15px;">Responde con total honestidad. No hay respuestas correctas o incorrectas. Solo patrones que necesitas reconocer.</p>
+            <p style="margin-top: 15px; color: #B69CFF;"><strong>Tiempo estimado:</strong> 5-7 minutos</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <form id="testForm">
+            <!-- Explorador Dopamínico -->
+            <div class="question-container">
+                <div class="question-number">Pregunta 1 de 21</div>
+                <div class="question-text">Empiezo proyectos con muchísima energía, pero cuando la novedad desaparece, pierdo el interés.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q1_1" name="q1" value="1" required>
+                        <label for="q1_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q1_2" name="q1" value="2">
+                        <label for="q1_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q1_3" name="q1" value="3">
+                        <label for="q1_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q1_4" name="q1" value="4">
+                        <label for="q1_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q1_5" name="q1" value="5">
+                        <label for="q1_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 2 de 21</div>
+                <div class="question-text">Me aburre profundamente repetir tareas, aunque sean necesarias para que algo funcione.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q2_1" name="q2" value="1" required>
+                        <label for="q2_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q2_2" name="q2" value="2">
+                        <label for="q2_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q2_3" name="q2" value="3">
+                        <label for="q2_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q2_4" name="q2" value="4">
+                        <label for="q2_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q2_5" name="q2" value="5">
+                        <label for="q2_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 3 de 21</div>
+                <div class="question-text">Busco constantemente nuevas ideas, herramientas o métodos porque los anteriores "ya no me emocionan".</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q3_1" name="q3" value="1" required>
+                        <label for="q3_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q3_2" name="q3" value="2">
+                        <label for="q3_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q3_3" name="q3" value="3">
+                        <label for="q3_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q3_4" name="q3" value="4">
+                        <label for="q3_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q3_5" name="q3" value="5">
+                        <label for="q3_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <!-- Perfeccionista Paralizado -->
+            <div class="question-container">
+                <div class="question-number">Pregunta 4 de 21</div>
+                <div class="question-text">Siento que nunca está lo suficientemente listo para mostrarlo/lanzarlo al mundo.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q4_1" name="q4" value="1" required>
+                        <label for="q4_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q4_2" name="q4" value="2">
+                        <label for="q4_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q4_3" name="q4" value="3">
+                        <label for="q4_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q4_4" name="q4" value="4">
+                        <label for="q4_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q4_5" name="q4" value="5">
+                        <label for="q4_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 5 de 21</div>
+                <div class="question-text">Paso más tiempo ajustando detalles que avanzando en lo esencial del proyecto.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q5_1" name="q5" value="1" required>
+                        <label for="q5_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q5_2" name="q5" value="2">
+                        <label for="q5_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q5_3" name="q5" value="3">
+                        <label for="q5_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q5_4" name="q5" value="4">
+                        <label for="q5_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q5_5" name="q5" value="5">
+                        <label for="q5_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 6 de 21</div>
+                <div class="question-text">El miedo a ser criticado o juzgado me frena más que la falta de tiempo o recursos.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q6_1" name="q6" value="1" required>
+                        <label for="q6_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q6_2" name="q6" value="2">
+                        <label for="q6_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q6_3" name="q6" value="3">
+                        <label for="q6_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q6_4" name="q6" value="4">
+                        <label for="q6_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q6_5" name="q6" value="5">
+                        <label for="q6_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <!-- Multivisión Disperso -->
+            <div class="question-container">
+                <div class="question-number">Pregunta 7 de 21</div>
+                <div class="question-text">Tengo varias ideas/proyectos activos al mismo tiempo y me cuesta elegir en cuál enfocarme.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q7_1" name="q7" value="1" required>
+                        <label for="q7_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q7_2" name="q7" value="2">
+                        <label for="q7_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q7_3" name="q7" value="3">
+                        <label for="q7_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q7_4" name="q7" value="4">
+                        <label for="q7_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q7_5" name="q7" value="5">
+                        <label for="q7_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 8 de 21</div>
+                <div class="question-text">Cuando aparece una nueva idea que me emociona, dejo en pausa lo que estaba haciendo.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q8_1" name="q8" value="1" required>
+                        <label for="q8_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q8_2" name="q8" value="2">
+                        <label for="q8_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q8_3" name="q8" value="3">
+                        <label for="q8_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q8_4" name="q8" value="4">
+                        <label for="q8_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q8_5" name="q8" value="5">
+                        <label for="q8_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 9 de 21</div>
+                <div class="question-text">Mi problema no es la creatividad, es terminar lo que empiezo antes de saltar a lo siguiente.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q9_1" name="q9" value="1" required>
+                        <label for="q9_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q9_2" name="q9" value="2">
+                        <label for="q9_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q9_3" name="q9" value="3">
+                        <label for="q9_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q9_4" name="q9" value="4">
+                        <label for="q9_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q9_5" name="q9" value="5">
+                        <label for="q9_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <!-- Autosuficiente Exhausto -->
+            <div class="question-container">
+                <div class="question-number">Pregunta 10 de 21</div>
+                <div class="question-text">Me cuesta mucho delegar o pedir ayuda, prefiero hacerlo todo yo.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q10_1" name="q10" value="1" required>
+                        <label for="q10_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q10_2" name="q10" value="2">
+                        <label for="q10_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q10_3" name="q10" value="3">
+                        <label for="q10_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q10_4" name="q10" value="4">
+                        <label for="q10_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q10_5" name="q10" value="5">
+                        <label for="q10_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 11 de 21</div>
+                <div class="question-text">He abandonado proyectos porque me sobrecargué intentando sostener todo solo/a.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q11_1" name="q11" value="1" required>
+                        <label for="q11_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q11_2" name="q11" value="2">
+                        <label for="q11_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q11_3" name="q11" value="3">
+                        <label for="q11_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q11_4" name="q11" value="4">
+                        <label for="q11_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q11_5" name="q11" value="5">
+                        <label for="q11_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 12 de 21</div>
+                <div class="question-text">Siento que si pido ayuda, significa que no soy capaz o que estoy fallando.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q12_1" name="q12" value="1" required>
+                        <label for="q12_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q12_2" name="q12" value="2">
+                        <label for="q12_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q12_3" name="q12" value="3">
+                        <label for="q12_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q12_4" name="q12" value="4">
+                        <label for="q12_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q12_5" name="q12" value="5">
+                        <label for="q12_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <!-- Sensible al Fracaso -->
+            <div class="question-container">
+                <div class="question-number">Pregunta 13 de 21</div>
+                <div class="question-text">Cuando algo no funciona como esperaba, lo interpreto como una señal de que "no soy suficiente".</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q13_1" name="q13" value="1" required>
+                        <label for="q13_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q13_2" name="q13" value="2">
+                        <label for="q13_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q13_3" name="q13" value="3">
+                        <label for="q13_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q13_4" name="q13" value="4">
+                        <label for="q13_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q13_5" name="q13" value="5">
+                        <label for="q13_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 14 de 21</div>
+                <div class="question-text">Un mal resultado me desmotiva tanto que pierdo las ganas de continuar.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q14_1" name="q14" value="1" required>
+                        <label for="q14_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q14_2" name="q14" value="2">
+                        <label for="q14_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q14_3" name="q14" value="3">
+                        <label for="q14_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q14_4" name="q14" value="4">
+                        <label for="q14_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q14_5" name="q14" value="5">
+                        <label for="q14_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 15 de 21</div>
+                <div class="question-text">Mi autoestima sube o baja según los resultados externos (ventas, likes, validación).</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q15_1" name="q15" value="1" required>
+                        <label for="q15_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q15_2" name="q15" value="2">
+                        <label for="q15_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q15_3" name="q15" value="3">
+                        <label for="q15_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q15_4" name="q15" value="4">
+                        <label for="q15_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q15_5" name="q15" value="5">
+                        <label for="q15_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <!-- Estratega Fantasma -->
+            <div class="question-container">
+                <div class="question-number">Pregunta 16 de 21</div>
+                <div class="question-text">Sé exactamente qué debería hacer para que mi proyecto funcione, pero no lo ejecuto.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q16_1" name="q16" value="1" required>
+                        <label for="q16_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q16_2" name="q16" value="2">
+                        <label for="q16_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q16_3" name="q16" value="3">
+                        <label for="q16_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q16_4" name="q16" value="4">
+                        <label for="q16_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q16_5" name="q16" value="5">
+                        <label for="q16_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 17 de 21</div>
+                <div class="question-text">Paso mucho tiempo planificando, investigando, aprendiendo... pero poco tiempo haciendo.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q17_1" name="q17" value="1" required>
+                        <label for="q17_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q17_2" name="q17" value="2">
+                        <label for="q17_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q17_3" name="q17" value="3">
+                        <label for="q17_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q17_4" name="q17" value="4">
+                        <label for="q17_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q17_5" name="q17" value="5">
+                        <label for="q17_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 18 de 21</div>
+                <div class="question-text">Tengo cuadernos/archivos llenos de estrategias brillantes que nunca implementé.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q18_1" name="q18" value="1" required>
+                        <label for="q18_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q18_2" name="q18" value="2">
+                        <label for="q18_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q18_3" name="q18" value="3">
+                        <label for="q18_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q18_4" name="q18" value="4">
+                        <label for="q18_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q18_5" name="q18" value="5">
+                        <label for="q18_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <!-- Regulador Inestable -->
+            <div class="question-container">
+                <div class="question-number">Pregunta 19 de 21</div>
+                <div class="question-text">Mi energía es muy inconsistente: días híper productivos seguidos de días donde no puedo hacer nada.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q19_1" name="q19" value="1" required>
+                        <label for="q19_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q19_2" name="q19" value="2">
+                        <label for="q19_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q19_3" name="q19" value="3">
+                        <label for="q19_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q19_4" name="q19" value="4">
+                        <label for="q19_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q19_5" name="q19" value="5">
+                        <label for="q19_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 20 de 21</div>
+                <div class="question-text">Dependo mucho de "cómo me siento hoy" para saber si podré trabajar o no.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q20_1" name="q20" value="1" required>
+                        <label for="q20_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q20_2" name="q20" value="2">
+                        <label for="q20_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q20_3" name="q20" value="3">
+                        <label for="q20_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q20_4" name="q20" value="4">
+                        <label for="q20_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q20_5" name="q20" value="5">
+                        <label for="q20_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-number">Pregunta 21 de 21</div>
+                <div class="question-text">Después de períodos intensos de productividad, inevitablemente colapso y abandono todo por días/semanas.</div>
+                <div class="scale-container">
+                    <div class="scale-option">
+                        <input type="radio" id="q21_1" name="q21" value="1" required>
+                        <label for="q21_1">1</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q21_2" name="q21" value="2">
+                        <label for="q21_2">2</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q21_3" name="q21" value="3">
+                        <label for="q21_3">3</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q21_4" name="q21" value="4">
+                        <label for="q21_4">4</label>
+                    </div>
+                    <div class="scale-option">
+                        <input type="radio" id="q21_5" name="q21" value="5">
+                        <label for="q21_5">5</label>
+                    </div>
+                </div>
+                <div class="scale-labels">
+                    <span>Nunca</span>
+                    <span>Siempre</span>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">✨ Descubrir mi Arquetipo ✨</button>
+        </form>
+
+        <!-- Contenedor de resultados -->
+        <div id="resultContainer" class="result-container">
+            <!-- El resultado se insertará aquí dinámicamente -->
+        </div>
+    </div>
+
+    <script>
+        // Actualizar barra de progreso
+        const form = document.getElementById('testForm');
+        const progressBar = document.getElementById('progressBar');
+        
+        form.addEventListener('change', function() {
+            const totalQuestions = 21;
+            let answeredQuestions = 0;
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                if (document.querySelector(`input[name="q${i}"]:checked`)) {
+                    answeredQuestions++;
+                }
+            }
+            
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            progressBar.style.width = progress + '%';
+        });
+
+        // Procesar formulario
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Calcular puntajes
+            const scores = {
+                explorador: 0,
+                perfeccionista: 0,
+                multivision: 0,
+                autosuficiente: 0,
+                sensible: 0,
+                estratega: 0,
+                regulador: 0
+            };
+
+            // Explorador Dopamínico (preguntas 1-3)
+            for (let i = 1; i <= 3; i++) {
+                const value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                scores.explorador += value;
+            }
+
+            // Perfeccionista Paralizado (preguntas 4-6)
+            for (let i = 4; i <= 6; i++) {
+                const value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                scores.perfeccionista += value;
+            }
+
+            // Multivisión Disperso (preguntas 7-9)
+            for (let i = 7; i <= 9; i++) {
+                const value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                scores.multivision += value;
+            }
+
+            // Autosuficiente Exhausto (preguntas 10-12)
+            for (let i = 10; i <= 12; i++) {
+                const value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                scores.autosuficiente += value;
+            }
+
+            // Sensible al Fracaso (preguntas 13-15)
+            for (let i = 13; i <= 15; i++) {
+                const value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                scores.sensible += value;
+            }
+
+            // Estratega Fantasma (preguntas 16-18)
+            for (let i = 16; i <= 18; i++) {
+                const value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                scores.estratega += value;
+            }
+
+            // Regulador Inestable (preguntas 19-21)
+            for (let i = 19; i <= 21; i++) {
+                const value = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
+                scores.regulador += value;
+            }
+
+            // Encontrar arquetipo dominante
+            const sortedScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            const dominantArchetype = sortedScores[0][0];
+            const secondaryArchetype = sortedScores[1][0];
+
+            // Mostrar resultado
+            displayResult(dominantArchetype, secondaryArchetype, scores);
+            
+            // Scroll al resultado
+            document.getElementById('resultContainer').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        function displayResult(dominant, secondary, scores) {
+            const resultContainer = document.getElementById('resultContainer');
+            
+            const archetypes = {
+                explorador: {
+                    icon: '🔥',
+                    name: 'EXPLORADOR DOPAMÍNICO',
+                    phrase: '"Ya no me emociona."',
+                    pattern: 'Inicias con alta energía, pero cuando la novedad desaparece, tu sistema dopaminérgico baja y pierdes el impulso. No es falta de compromiso, es tu configuración neurobiológica respondiendo a la ausencia de estímulo nuevo.',
+                    trigger: 'La rutina y la repetición sin variación. Tu cerebro interpreta "familiar" como "aburrido" y busca automáticamente algo más estimulante.',
+                    practice: 'Trabaja en bloques de 45 minutos con micro-variación: cambia playlist, lugar físico, herramienta o formato en cada bloque. Tu cerebro necesita sentir que algo es diferente.',
+                    anchor: 'No cambies el proyecto. Cambia cómo lo estás haciendo. Introduce novedad inmediata en menos de 5 minutos: cambia tu entorno físico o el formato de la tarea.',
+                    mantra: 'No necesito algo nuevo. Necesito hacer esto de forma nueva.',
+                    nextStep: 'Elige tu proyecto actual y rediseña una parte para que se sienta distinta: visual, formato, orden, ritmo o enfoque. Hazlo sentir nuevo sin abandonarlo.'
+                },
+                perfeccionista: {
+                    icon: '🎯',
+                    name: 'PERFECCIONISTA PARALIZADO',
+                    phrase: '"Aún no está listo."',
+                    pattern: 'Nunca lanzas porque siempre hay algo más que "mejorar". Confundes excelencia con perfección, y el miedo al juicio te mantiene eternamente en modo edición.',
+                    trigger: 'El miedo a la crítica y la necesidad de control absoluto sobre cómo te perciben. Tu mente te protege del rechazo... manteniéndote en lo invisible.',
+                    practice: 'Publica algo imperfecto todos los días: un post corto, una idea sin pulir, un borrador, un avance. Entrena el músculo de mostrar antes de que esté "perfecto".',
+                    anchor: 'Cuenta regresiva 5-4-3-2-1 y publica antes de que tu mente tenga tiempo de sabotearte. Tu ventana de valentía son esos 5 segundos. Úsalos.',
+                    mantra: 'Útil hoy vence perfecto nunca.',
+                    nextStep: 'Define una fecha pública de lanzamiento para algo, aunque no esté completamente listo. Comprométete públicamente con esa fecha.'
+                },
+                multivision: {
+                    icon: '🌀',
+                    name: 'MULTIVISIÓN DISPERSO',
+                    phrase: '"Tengo otra idea mejor."',
+                    pattern: 'Tu mente creativa genera ideas más rápido de lo que puedes ejecutarlas. Cada nueva idea parece más brillante que la anterior, y saltas antes de terminar porque "esto nuevo tiene más potencial".',
+                    trigger: 'La ausencia de un sistema ejecutivo que contenga tu mente generativa. No es falta de creatividad ni de inteligencia. Es falta de estructura de contención.',
+                    practice: 'Escribe TODAS tus ideas nuevas en tu documento "Parking Lot" antes de empezar a trabajar. Vacía tu mente ahí, luego enfócate en tu proyecto activo. Las ideas no se pierden, solo se aplazan.',
+                    anchor: 'Repite en voz alta: "No es un no. Es un después." Captura la idea en tu parking lot, pero no la ejecutes hoy. Promete revisarla en 3 meses.',
+                    mantra: 'La profundidad crea resultados. La dispersión crea ilusión.',
+                    nextStep: 'Define hoy mismo cuál es tu ÚNICO proyecto activo esta semana. Escríbelo en grande. Ponlo visible. Todo lo demás es "después".'
+                },
+                autosuficiente: {
+                    icon: '💪',
+                    name: 'AUTOSUFICIENTE EXHAUSTO',
+                    phrase: '"Yo puedo solo/a."',
+                    pattern: 'Te sobrecargas porque crees que pedir ayuda es debilidad o fracaso. Te quemas sosteniendo todo tú solo/a hasta que el sistema colapsa por sobrepeso emocional, mental y físico.',
+                    trigger: 'Hiperresponsabilidad + dificultad para delegar o pedir apoyo. Tu mente equipara "pedir ayuda" con "no ser suficiente". Te agotas sosteniendo lo que deberías distribuir.',
+                    practice: 'Pregúntate cada mañana: "¿Qué NO tengo que hacer yo hoy?" Identifica al menos una tarea que puedas soltar, delegar o eliminar. Hazlo ritual no negociable.',
+                    anchor: 'Escribe lista completa de tus tareas → tacha UNA → delégala, elimínala o automatízala de inmediato. No negocies con tu necesidad de soltar carga.',
+                    mantra: 'Sostener no es cargar solo/a. Es distribuir inteligentemente.',
+                    nextStep: 'Delega una tarea real esta semana, aunque sea pequeña. Puede ser contratar servicio, pedir favor, usar automatización o simplemente dejar de hacerla porque no es esencial.'
+                },
+                sensible: {
+                    icon: '🧠',
+                    name: 'SENSIBLE AL FRACASO',
+                    phrase: '"Si no funciona, significa algo sobre mí."',
+                    pattern: 'Interpretas los resultados externos como evidencia de tu valor personal. Un "no", una venta perdida, un comentario negativo = prueba interna de que "no eres suficiente". El miedo al fracaso te paraliza o te hace abandonar antes de fallar.',
+                    trigger: 'Autoestima ligada al rendimiento externo. Tu sistema nervioso no diferencia entre "esto no funcionó" y "yo no funciono". Cada resultado externo se convierte en juicio interno.',
+                    practice: 'Registro científico nocturno: • Experimento (¿qué intenté hoy?) • Resultado (¿qué pasó? sin juicio personal) • Ajuste (¿qué variable modifico mañana?)',
+                    anchor: 'Mano en pecho + respiración lenta (3 ciclos completos) + pregunta técnica: "¿Qué variable del experimento ajusto?" No preguntes "¿qué está mal conmigo?". Pregunta "¿qué ajusto en el proceso?".',
+                    mantra: 'No fallé. Recopilé datos.',
+                    nextStep: 'Haz un experimento donde el objetivo NO sea que funcione, sino simplemente observar qué sucede. Quítale toda la presión del éxito. Solo observa.'
+                },
+                estratega: {
+                    icon: '📊',
+                    name: 'ESTRATEGA FANTASMA',
+                    phrase: '"Sé exactamente qué hacer… pero no lo hago."',
+                    pattern: 'Tu mente está sobreestimulada (ideas brillantes, análisis profundo, estrategias perfectas) pero tu conducta está subactivada. Sabes TODO lo que deberías hacer... y ejecutas nada o muy poco.',
+                    trigger: 'Parálisis por exceso de información + necesidad de claridad absoluta antes de actuar. Tu mente consume más de lo que produce. El análisis se convierte en procrastinación disfrazada de preparación.',
+                    practice: 'Ejecuta tu acción mínima ANTES de consumir cualquier contenido. Regla no negociable: Primero hacer, después aprender. 15 minutos de ejecución → luego puedes leer, investigar, planear.',
+                    anchor: 'Detente inmediatamente. Ejecuta una versión ridículamente pequeña en ese mismo instante. No mañana. No "cuando esté más claro". Ahora. Aunque sea imperfecta.',
+                    mantra: 'Moverse mal vence pensar perfecto.',
+                    nextStep: 'Define tu acción mínima diaria (máximo 15 minutos) y ejecútala 7 días seguidos. Sin fallar ni un día. Sin importar cuán imperfecta sea.'
+                },
+                regulador: {
+                    icon: '🌊',
+                    name: 'REGULADOR INESTABLE',
+                    phrase: '"Hoy sí puedo… hoy no puedo."',
+                    pattern: 'Tu energía sigue un patrón caótico: días híper-productivos seguidos de colapsos totales. Dependes completamente de "cómo te sientes" para trabajar, y tu sistema nervioso está desregulado.',
+                    trigger: 'Desregulación del sistema nervioso + dependencia de motivación fluctuante. No tienes ritmo biológico estable. Tu energía es reactiva, no sostenida.',
+                    practice: 'Trabaja siempre en el mismo bloque horario fijo, aunque hagas poco. Tu sistema nervioso necesita predictibilidad para regularse. La constancia del horario es más importante que la cantidad producida.',
+                    anchor: 'Cambia inmediatamente a modo mantenimiento: tareas simples y no creativas (responder emails, organizar archivos, revisar pendientes). No abandones, solo cambia de intensidad.',
+                    mantra: 'Ritmo estable vence motivación intensa.',
+                    nextStep: 'Diseña tu "versión 30%": la rutina mínima para tus días bajos. Define qué harás cuando no puedas al 100%, para no colapsar a 0%. Escríbela y tenla visible.'
+                }
+            };
+
+            const archetype = archetypes[dominant];
+            const secondaryArch = archetypes[secondary];
+
+            const html = `
+                <div class="archetype-icon">${archetype.icon}</div>
+                <h2 class="result-title">${archetype.name}</h2>
+                
+                <div class="result-section">
+                    <h3>Tu frase interna</h3>
+                    <p style="font-style: italic; color: #B69CFF; font-size: 1.2em;">${archetype.phrase}</p>
+                </div>
+
+                <div class="result-section">
+                    <h3>Tu patrón de abandono</h3>
+                    <p>${archetype.pattern}</p>
+                </div>
+
+                <div class="result-section">
+                    <h3>Tu detonante interno</h3>
+                    <p>${archetype.trigger}</p>
+                </div>
+
+                <div class="result-section">
+                    <h3>📋 TU PROTOCOLO DE SOSTÉN PERSONALIZADO</h3>
+                    
+                    <h4 style="color: #00E5FF; margin-top: 20px; margin-bottom: 10px;">🎯 Práctica diaria</h4>
+                    <p>${archetype.practice}</p>
+
+                    <h4 style="color: #00E5FF; margin-top: 20px; margin-bottom: 10px;">⚓ Anclaje de regulación (cuando quieras abandonar)</h4>
+                    <p>${archetype.anchor}</p>
+
+                    <div class="mantra">${archetype.mantra}</div>
+
+                    <h4 style="color: #00E5FF; margin-top: 20px; margin-bottom: 10px;">✨ Siguiente paso (esta semana)</h4>
+                    <p>${archetype.nextStep}</p>
+                </div>
+
+                <div class="result-section">
+                    <h3>Tu arquetipo secundario: ${secondaryArch.name}</h3>
+                    <p>También tienes rasgos de <strong style="color: #B69CFF;">${secondaryArch.name}</strong>.</p>
+                    
+                    <div class="secondary-expand" onclick="toggleSecondary()">
+                        📖 Ver estrategias del arquetipo secundario
+                    </div>
+                    
+                    <div class="secondary-content" id="secondaryContent">
+                        <div style="background: rgba(177, 156, 217, 0.15); padding: 20px; border-radius: 10px; margin-top: 20px;">
+                            <h4 style="color: #B69CFF; margin-bottom: 15px;">Estrategias de ${secondaryArch.name}</h4>
+                            
+                            <h4 style="color: #00E5FF; margin-top: 20px; margin-bottom: 10px;">🎯 Práctica diaria</h4>
+                            <p>${secondaryArch.practice}</p>
+
+                            <h4 style="color: #00E5FF; margin-top: 20px; margin-bottom: 10px;">⚓ Anclaje de regulación</h4>
+                            <p>${secondaryArch.anchor}</p>
+
+                            <div style="background: linear-gradient(45deg, rgba(177, 156, 217, 0.3), rgba(0, 245, 255, 0.2)); padding: 20px; border-radius: 10px; text-align: center; font-size: 1.2em; font-style: italic; color: #B69CFF; margin: 20px 0; border: 2px solid #B69CFF;">
+                                ${secondaryArch.mantra}
+                            </div>
+
+                            <h4 style="color: #00E5FF; margin-top: 20px; margin-bottom: 10px;">✨ Siguiente paso</h4>
+                            <p>${secondaryArch.nextStep}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="result-section" style="background: linear-gradient(45deg, rgba(0, 245, 255, 0.1), rgba(177, 156, 217, 0.1)); border: 2px solid #00E5FF;">
+                    <h3 style="text-align: center;">✨ PRINCIPIO MAESTRO DEL MÉTODO RITMO ALFA™ ✨</h3>
+                    <p style="text-align: center; font-size: 1.3em; margin: 20px 0;">
+                        <strong>Coherencia = sentir + pensar + actuar en la misma dirección</strong>
+                    </p>
+                    <p style="text-align: center;">Cuando estas tres fuerzas se alinean, el sostén deja de ser esfuerzo y se convierte en tu estado natural.</p>
+                </div>
+
+                <div class="result-section">
+                    <h3 style="text-align: center;">💡 Recuerda</h3>
+                    <p style="text-align: center;">
+                        <strong>Sostener no es aguantar.</strong><br>
+                        Sostener es permanecer presente sin colapsar ni huir cuando algo deja de ser cómodo.
+                    </p>
+                    <p style="text-align: center; margin-top: 20px; color: #00E5FF;">
+                        <strong>El sostén no se piensa. Se entrena.</strong><br>
+                        Empieza hoy.
+                    </p>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <button onclick="window.print()" style="padding: 15px 40px; background: linear-gradient(45deg, #B69CFF, #00E5FF); color: #000; border: none; border-radius: 30px; font-size: 1.1em; cursor: pointer; font-weight: bold;">
+                        📄 Guardar mi resultado
+                    </button>
+                </div>
+            `;
+
+            resultContainer.innerHTML = html + `
+                <div class="mg-phase-footer">
+                    <div class="mg-phase-track">FASE 1 DE 4 · IDENTIFICA</div>
+                    <div class="mg-phase-actions">
+                        <a href="index.html" class="mg-btn-ghost">Volver al mapa</a>
+                        <a href="fase2-alinea.html" class="mg-btn-solid">Siguiente fase →</a>
+                    </div>
+                </div>
+            `;
+            resultContainer.classList.add('show');
+
+            try {
+                const store = JSON.parse(localStorage.getItem('mg_journey') || '{}');
+                store.fase1 = {
+                    arquetipo: archetype.name,
+                    frase: archetype.phrase,
+                    arquetipoSecundario: secondaryArch.name
+                };
+                localStorage.setItem('mg_journey', JSON.stringify(store));
+            } catch (e) {}
+        }
+
+        function toggleSecondary() {
+            const content = document.getElementById('secondaryContent');
+            content.classList.toggle('expanded');
+        }
+    </script>
+</body>
+</html>
