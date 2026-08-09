@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fase 4 — Recupera · Mapa de Proyectos Latentes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@400;700&family=Playfair+Display:ital,wght@0,500;1,500&family=Poppins:wght@300;400;500;600&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #050505;
+    --deep: #1A0B3D;
+    --violet: #5B1EFF;
+    --magenta: #D946EF;
+    --cyan: #00E5FF;
+    --gold: #F6C453;
+    --lavender: #B69CFF;
+    --white: #ffffff;
+    --silver: #c9c3e0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    min-height: 100vh;
+    background: var(--void);
+    font-family: 'Poppins', sans-serif;
+    color: var(--white);
+  }
+  .aura-bg {
+    position: fixed; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(91,30,255,0.16) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 80% 80%, rgba(217,70,239,0.09) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .container {
+    position: relative; z-index: 1;
+    max-width: 640px; margin: 0 auto;
+    padding: 40px 22px 90px;
+  }
+
+  /* header / phase progress */
+  .back-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 0.05em;
+    color: rgba(0,229,255,0.6); text-decoration: none; margin-bottom: 26px;
+  }
+  .back-link:hover { color: var(--cyan); }
+
+  .phase-tag {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--cyan); margin-bottom: 10px;
+  }
+  h1.title {
+    font-family: 'Playfair Display', serif; font-style: italic; font-weight: 500;
+    font-size: clamp(24px, 6vw, 32px); color: var(--lavender); margin-bottom: 10px;
+  }
+  .lede {
+    font-family: 'Poppins', sans-serif; font-size: 13.5px; line-height: 1.7;
+    color: var(--silver); max-width: 520px; margin-bottom: 34px;
+  }
+
+  .section {
+    border-top: 1px solid rgba(182,156,255,0.12);
+    padding-top: 22px; margin-bottom: 30px;
+  }
+  .section-title {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 14px;
+  }
+
+  /* project rows */
+  #projectList { display: flex; flex-direction: column; gap: 16px; margin-bottom: 16px; }
+
+  .project-card {
+    background: rgba(182,156,255,0.03);
+    border: 1px solid rgba(91,30,255,0.18);
+    padding: 18px;
+    display: flex; flex-direction: column; gap: 12px;
+  }
+
+  .field label {
+    display: block; font-family: 'DM Mono', monospace; font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase; color: rgba(182,156,255,0.55);
+    margin-bottom: 6px;
+  }
+  .field input[type="text"], .field textarea, .field select {
+    width: 100%;
+    background: rgba(5,5,5,0.6);
+    border: 1px solid rgba(91,30,255,0.25);
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    padding: 9px 12px;
+    border-radius: 2px;
+    resize: vertical;
+  }
+  .field input[type="text"]:focus, .field textarea:focus, .field select:focus {
+    outline: none; border-color: rgba(0,229,255,0.5);
+  }
+  .field select { appearance: none; cursor: pointer; }
+
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .row2 { grid-template-columns: 1fr; } }
+
+  .interest-toggle { display: flex; gap: 8px; }
+  .interest-toggle button {
+    flex: 1; padding: 8px; font-family: 'Poppins', sans-serif; font-size: 12px;
+    background: rgba(5,5,5,0.6); border: 1px solid rgba(91,30,255,0.25); color: var(--silver);
+    cursor: pointer; border-radius: 2px; transition: all 0.25s ease;
+  }
+  .interest-toggle button.active-yes { background: rgba(0,229,255,0.12); border-color: var(--cyan); color: var(--cyan); }
+  .interest-toggle button.active-no { background: rgba(217,70,239,0.1); border-color: var(--magenta); color: var(--magenta); }
+
+  .remove-btn {
+    align-self: flex-end;
+    font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.3); background: none; border: none; cursor: pointer;
+  }
+  .remove-btn:hover { color: var(--magenta); }
+
+  .add-btn {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--cyan); background: rgba(0,229,255,0.06); border: 1px dashed rgba(0,229,255,0.35);
+    padding: 12px; width: 100%; cursor: pointer; border-radius: 2px; transition: all 0.3s ease;
+  }
+  .add-btn:hover { background: rgba(0,229,255,0.12); }
+
+  /* summary */
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 480px) { .summary-grid { grid-template-columns: 1fr; } }
+  .summary-box {
+    border: 1px solid rgba(91,30,255,0.2); padding: 14px 16px; background: rgba(182,156,255,0.03);
+  }
+  .summary-label {
+    font-family: 'Cinzel', serif; font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .summary-label.cerrar { color: rgba(255,255,255,0.4); }
+  .summary-label.recuperar { color: var(--cyan); }
+  .summary-label.incubar { color: var(--gold); }
+  .summary-label.priorizar { color: var(--magenta); }
+  .summary-items { font-family: 'Playfair Display', serif; font-style: italic; font-size: 13px; color: var(--silver); line-height: 1.7; }
+  .summary-items .empty { opacity: 0.35; font-style: normal; font-family: 'Poppins', sans-serif; font-size: 12px; }
+
+  /* keep note */
+  .keep-note {
+    background: rgba(91,30,255,0.05); border-left: 2px solid var(--cyan);
+    padding: 16px 20px; font-family: 'Poppins', sans-serif; font-size: 12.5px;
+    line-height: 1.7; color: var(--silver); margin-bottom: 34px;
+  }
+  .keep-note b { color: var(--lavender); font-weight: 500; }
+
+  /* nav footer */
+  .phase-footer {
+    border-top: 1px solid rgba(182,156,255,0.15); padding-top: 26px; text-align: center;
+  }
+  .phase-footer .of5 {
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.2em; color: rgba(255,255,255,0.35);
+    margin-bottom: 8px;
+  }
+  .phase-footer .msg {
+    font-family: 'Playfair Display', serif; font-style: italic; font-size: 15px; color: var(--lavender);
+    margin-bottom: 20px;
+  }
+  .next-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--void); background: linear-gradient(90deg, var(--cyan), var(--violet));
+    text-decoration: none; padding: 12px 26px; border-radius: 20px; transition: all 0.3s ease;
+  }
+  .next-btn:hover { box-shadow: 0 0 22px rgba(0,229,255,0.4); }
+  .map-link {
+    display: block; margin-top: 18px; font-family: 'DM Mono', monospace; font-size: 10.5px;
+    letter-spacing: 0.05em; color: rgba(182,156,255,0.5); text-decoration: none;
+  }
+  .map-link:hover { color: var(--cyan); }
+
+  .autosave-note {
+    text-align: center; font-family: 'DM Mono', monospace; font-size: 9.5px;
+    color: rgba(255,255,255,0.25); margin-top: -6px; margin-bottom: 26px; letter-spacing: 0.04em;
+  }
+</style>
+</head>
+<body>
+<div class="aura-bg"></div>
+
+<div class="container">
+
+  <a class="back-link" href="index.html">← Volver al mapa</a>
+
+  <p class="phase-tag">Fase 4 — Recupera</p>
+  <h1 class="title">Mapa de Proyectos Latentes</h1>
+  <p class="lede">
+    Recupera las ideas, proyectos, intereses y pasiones que alguna vez comenzaste y quedaron
+    inconclusos. Esta fase es el puente entre lo que exploraste en las fases anteriores y la
+    ejecución de la Fase 5: aquí seleccionas qué merece continuar.
+  </p>
+
+  <div class="section">
+    <p class="section-title">1 — Enumera tus proyectos inconclusos</p>
+    <div id="projectList"></div>
+    <button class="add-btn" id="addProjectBtn">+ Agregar proyecto</button>
+  </div>
+
+  <div class="section" id="summarySection">
+    <p class="section-title">2 — Clasificación</p>
+    <div class="summary-grid">
+      <div class="summary-box">
+        <p class="summary-label cerrar">Cerrar</p>
+        <div class="summary-items" id="sum-cerrar"><span class="empty">— sin proyectos aún —</span></div>
+      </div>
+      <div class="summary-box">
+        <p class="summary-label recuperar">Recuperar</p>
+        <div class="summary-items" id="sum-recuperar"><span class="empty">— sin proyectos aún —</span></div>
+      </div>
+      <div class="summary-box">
+        <p class="summary-label incubar">Incubar</p>
+        <div class="summary-items" id="sum-incubar"><span class="empty">— sin proyectos aún —</span></div>
+      </div>
+      <div class="summary-box">
+        <p class="summary-label priorizar">Priorizar</p>
+        <div class="summary-items" id="sum-priorizar"><span class="empty">— sin proyectos aún —</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="keep-note">
+    <b>Después de esta fase, guarda:</b> tu clasificación final, el o los proyectos que
+    marcaste como "Priorizar", el motivo de abandono más frecuente entre tus proyectos, y
+    tu próxima acción concreta sobre el proyecto priorizado. Esta información es la que usarás en la Fase 5.
+  </div>
+
+  <div class="phase-footer">
+    <p class="of5">FASE 4 DE 5</p>
+    <p class="msg">Ya seleccionaste qué proyecto merece tu energía ahora.</p>
+    <a class="next-btn" href="https://ritmobeta.vercel.app/" target="_blank">Siguiente: Fase 5 — Ejecuta →</a>
+    <a class="map-link" href="index.html">Volver al mapa de la metodología</a>
+  </div>
+
+</div>
+
+<script>
+const STORAGE_KEY = 'fase4_proyectos_latentes';
+const REASONS = ['Falta de tiempo', 'Saturación', 'Perfeccionismo', 'Miedo', 'Falta de claridad', 'Otra razón'];
+const CLASSIFICATIONS = [
+  { value: '', label: 'Sin clasificar' },
+  { value: 'cerrar', label: 'Cerrar' },
+  { value: 'recuperar', label: 'Recuperar' },
+  { value: 'incubar', label: 'Incubar' },
+  { value: 'priorizar', label: 'Priorizar' },
+];
+
+let projects = load();
+if (projects.length === 0) projects = [emptyProject()];
+
+function emptyProject() {
+  return {
+    id: Date.now() + Math.random(),
+    name: '',
+    interest: null, // 'yes' | 'no' | null
+    reason: REASONS[0],
+    relacionFase2: '',
+    relacionFase3: '',
+    classification: ''
+  };
+}
+
+function load() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) { return []; }
+}
+
+function save() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(projects)); } catch (e) {}
+}
+
+function render() {
+  const list = document.getElementById('projectList');
+  list.innerHTML = '';
+  projects.forEach((p, i) => {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+    card.innerHTML = `
+      <div class="field">
+        <label>Proyecto / idea ${i + 1}</label>
+        <input type="text" data-field="name" data-id="${p.id}" placeholder="Ej. Podcast, curso online, huerto urbano..." value="${escapeHtml(p.name)}">
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label>¿Todavía te genera interés?</label>
+          <div class="interest-toggle">
+            <button type="button" data-interest="yes" data-id="${p.id}" class="${p.interest === 'yes' ? 'active-yes' : ''}">Sí</button>
+            <button type="button" data-interest="no" data-id="${p.id}" class="${p.interest === 'no' ? 'active-no' : ''}">Ya no</button>
+          </div>
+        </div>
+        <div class="field">
+          <label>¿Por qué quedó inconcluso?</label>
+          <select data-field="reason" data-id="${p.id}">
+            ${REASONS.map(r => `<option value="${r}" ${r === p.reason ? 'selected' : ''}>${r}</option>`).join('')}
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>¿Cómo se relaciona con tu propósito (Fase 2)?</label>
+        <textarea rows="2" data-field="relacionFase2" data-id="${p.id}" placeholder="Opcional">${escapeHtml(p.relacionFase2)}</textarea>
+      </div>
+      <div class="field">
+        <label>¿Cómo se relaciona con tus intereses/pasiones (Fase 3)?</label>
+        <textarea rows="2" data-field="relacionFase3" data-id="${p.id}" placeholder="Opcional">${escapeHtml(p.relacionFase3)}</textarea>
+      </div>
+      <div class="field">
+        <label>Clasificación</label>
+        <select data-field="classification" data-id="${p.id}">
+          ${CLASSIFICATIONS.map(c => `<option value="${c.value}" ${c.value === p.classification ? 'selected' : ''}>${c.label}</option>`).join('')}
+        </select>
+      </div>
+      ${projects.length > 1 ? `<button class="remove-btn" data-remove="${p.id}">eliminar proyecto</button>` : ''}
+    `;
+    list.appendChild(card);
+  });
+
+  list.querySelectorAll('input[data-field], textarea[data-field]').forEach(el => {
+    el.addEventListener('input', onFieldChange);
+  });
+  list.querySelectorAll('select[data-field]').forEach(el => {
+    el.addEventListener('change', onFieldChange);
+  });
+  list.querySelectorAll('button[data-interest]').forEach(el => {
+    el.addEventListener('click', onInterestClick);
+  });
+  list.querySelectorAll('button[data-remove]').forEach(el => {
+    el.addEventListener('click', onRemoveClick);
+  });
+
+  renderSummary();
+}
+
+function onFieldChange(e) {
+  const id = parseFloat(e.target.dataset.id);
+  const field = e.target.dataset.field;
+  const p = projects.find(pr => pr.id === id);
+  if (!p) return;
+  p[field] = e.target.value;
+  save();
+  if (field === 'classification') renderSummary();
+}
+
+function onInterestClick(e) {
+  const id = parseFloat(e.target.dataset.id);
+  const val = e.target.dataset.interest;
+  const p = projects.find(pr => pr.id === id);
+  if (!p) return;
+  p.interest = p.interest === val ? null : val;
+  save();
+  render();
+}
+
+function onRemoveClick(e) {
+  const id = parseFloat(e.target.dataset.remove);
+  projects = projects.filter(p => p.id !== id);
+  if (projects.length === 0) projects = [emptyProject()];
+  save();
+  render();
+}
+
+function renderSummary() {
+  const groups = { cerrar: [], recuperar: [], incubar: [], priorizar: [] };
+  projects.forEach(p => {
+    if (p.classification && groups[p.classification] && p.name.trim()) {
+      groups[p.classification].push(p.name.trim());
+    }
+  });
+  Object.keys(groups).forEach(key => {
+    const el = document.getElementById('sum-' + key);
+    el.innerHTML = groups[key].length
+      ? groups[key].map(n => `<div>· ${escapeHtml(n)}</div>`).join('')
+      : '<span class="empty">— sin proyectos aún —</span>';
+  });
+}
+
+function escapeHtml(str) {
+  return (str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+document.getElementById('addProjectBtn').addEventListener('click', () => {
+  projects.push(emptyProject());
+  save();
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
