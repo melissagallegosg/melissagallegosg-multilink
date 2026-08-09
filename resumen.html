@@ -69,6 +69,7 @@
   .phase-card.fase2 { --accent: #5B1EFF; }
   .phase-card.fase3 { --accent: #B69CFF; }
   .phase-card.fase4 { --accent: #D946EF; }
+  .phase-card.fase5 { --accent: #F6C453; }
 
   .phase-label {
     font-family: 'Cinzel', serif;
@@ -116,7 +117,7 @@
   </div>
 
   <h1>✦ Mi Recorrido ✦</h1>
-  <p class="subtitle">Lectura consolidada de tus 4 fases</p>
+  <p class="subtitle">Lectura consolidada de tus 5 fases</p>
 
   <div id="phasesContainer"></div>
 
@@ -132,6 +133,18 @@
   function getStore() {
     try { return JSON.parse(localStorage.getItem('mg_journey') || '{}'); }
     catch (e) { return {}; }
+  }
+
+  function getFase4Projects() {
+    try {
+      const raw = localStorage.getItem('fase4_proyectos_latentes');
+      const arr = raw ? JSON.parse(raw) : [];
+      return Array.isArray(arr) ? arr.filter(p => p && p.name && p.name.trim()) : [];
+    } catch (e) { return []; }
+  }
+
+  function escapeHtml(str) {
+    return (str || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
   }
 
   function renderEmpty(label, link, accentClass) {
@@ -189,24 +202,47 @@
       html += renderEmpty('Fase 3 · Conecta', 'fase3-conecta.html', 'fase3');
     }
 
-    // FASE 4 — Ejecuta (Ritmo Beta)
-    if (store.fase5) {
+    // FASE 4 — Recupera (Mapa de Proyectos Latentes)
+    const fase4Projects = getFase4Projects();
+    const fase4Classified = fase4Projects.filter(p => p.classification);
+    if (fase4Classified.length > 0) {
+      const counts = { cerrar: 0, recuperar: 0, incubar: 0, priorizar: 0 };
+      fase4Classified.forEach(p => { if (counts[p.classification] !== undefined) counts[p.classification]++; });
+      const priorizados = fase4Classified.filter(p => p.classification === 'priorizar').map(p => p.name.trim());
       html += `
         <div class="phase-card fase4">
-          <div class="phase-label">Fase 4 · Ejecuta</div>
+          <div class="phase-label">Fase 4 · Recupera</div>
+          <div class="phase-title">${priorizados.length ? escapeHtml(priorizados[0]) : 'Mapa de proyectos latentes'}</div>
+          ${priorizados.length ? `<div class="phase-line"><strong>Proyecto priorizado:</strong> ${priorizados.map(escapeHtml).join(', ')}</div>` : '<div class="phase-line">Aún no marcaste un proyecto como "Priorizar".</div>'}
+          <div class="phase-line">Cerrar: ${counts.cerrar} · Recuperar: ${counts.recuperar} · Incubar: ${counts.incubar} · Priorizar: ${counts.priorizar}</div>
+        </div>
+      `;
+    } else {
+      html += renderEmpty('Fase 4 · Recupera', 'fase4-recupera.html', 'fase4');
+    }
+
+    // FASE 5 — Ejecuta (Ritmo Beta)
+    if (store.fase5) {
+      html += `
+        <div class="phase-card fase5">
+          <div class="phase-label">Fase 5 · Ejecuta</div>
           <div class="phase-title">${store.fase5.patronEjecucion}</div>
           <div class="phase-line">${store.fase5.descripcion}</div>
         </div>
       `;
     } else {
-      html += renderEmpty('Fase 4 · Ejecuta', 'fase5-ejecuta.html', 'fase4');
+      html += renderEmpty('Fase 5 · Ejecuta', 'fase5-ejecuta.html', 'fase5');
     }
 
     container.innerHTML = html;
 
-    const completed = ['fase1','fase2','fase3','fase5'].filter(k => store[k]).length;
+    const completed = ['fase1','fase2','fase3'].filter(k => store[k]).length
+      + (fase4Classified.length > 0 ? 1 : 0)
+      + (store.fase5 ? 1 : 0);
     const synth = document.getElementById('synthesisContainer');
-    if (completed === 4) {
+    if (completed === 5) {
+      const priorizados = fase4Classified.filter(p => p.classification === 'priorizar').map(p => p.name.trim());
+      const proyectoPriorizado = priorizados.length ? priorizados.join(', ') : 'el proyecto que decidas retomar';
       synth.innerHTML = `
         <div class="synthesis">
           <h2>✦ TU MAPA COMPLETO ✦</h2>
@@ -214,24 +250,26 @@
             Tu patrón de abandono es <strong>${store.fase1.arquetipo}</strong>, y tu propósito declarado es
             <strong>"${store.fase2.proposito}"</strong>.
             Tu mayor afinidad está en <strong>${store.fase3.areaPrincipal}</strong>,
+            recuperaste <strong>${escapeHtml(proyectoPriorizado)}</strong> como proyecto a priorizar,
             y tu forma natural de ejecutar es la de <strong>${store.fase5.patronEjecucion}</strong>.
           </p>
-          <p style="margin-top:14px;">Cuando conectas estas cuatro piezas — de dónde vienes, hacia dónde vas, qué te mueve y cómo ejecutas — dejas de depender de la motivación y empiezas a sostener con coherencia.</p>
+          <p style="margin-top:14px;">Cuando conectas estas cinco piezas — de dónde vienes, hacia dónde vas, qué te mueve, qué mereces recuperar y cómo ejecutas — dejas de depender de la motivación y empiezas a sostener con coherencia.</p>
         </div>
       `;
     } else {
       synth.innerHTML = `
         <div class="synthesis">
           <h2>✦ TU MAPA EN CONSTRUCCIÓN ✦</h2>
-          <p>Llevas ${completed} de 4 fases completadas. Termina el recorrido para ver tu lectura consolidada.</p>
+          <p>Llevas ${completed} de 5 fases completadas. Termina el recorrido para ver tu lectura consolidada.</p>
         </div>
       `;
     }
   }
 
   function resetJourney() {
-    if (!confirm('¿Seguro que quieres borrar todos tus resultados guardados de las 4 fases?')) return;
+    if (!confirm('¿Seguro que quieres borrar todos tus resultados guardados de las 5 fases?')) return;
     localStorage.removeItem('mg_journey');
+    localStorage.removeItem('fase4_proyectos_latentes');
     render();
   }
 
