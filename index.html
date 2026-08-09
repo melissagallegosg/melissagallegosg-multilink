@@ -412,6 +412,32 @@
   .link-arrow { font-size: 16px; color: var(--cyan); opacity: 0.4; transition: all 0.4s ease; position: relative; z-index: 1; }
   .link-card:hover .link-arrow { opacity: 0.9; transform: translateX(3px); }
 
+  .audio-tool-card { align-items: flex-start; cursor: default; }
+  .audio-tool-card:hover { transform: none; }
+  .audio-tool-card .link-icon { margin-top: 2px; }
+  .audio-tool-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-family: 'Cinzel', serif;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--void);
+    background: linear-gradient(90deg, var(--cyan), var(--violet));
+    text-decoration: none;
+    padding: 9px 18px;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+  }
+  .audio-tool-cta:hover {
+    box-shadow: 0 0 20px rgba(0,229,255,0.4);
+    transform: translateX(2px);
+  }
+
   /* === FOOTER === */
   .footer { margin-top: 48px; text-align: center; }
   .footer-symbol {
@@ -586,6 +612,15 @@
         </div>
         <span class="link-arrow">→</span>
       </a>
+
+      <div class="link-card audio-tool-card">
+        <div class="link-icon">☾</div>
+        <div class="link-text">
+          <span class="link-title">Audio Alfa → Theta → Delta</span>
+          <span class="link-desc">Una experiencia de sonido binaural, relajación y visualización diseñada para acompañar una transición progresiva hacia estados de relajación más profundos.</span>
+          <a class="audio-tool-cta" href="https://melissagallegosg.gumroad.com/l/audioalfathetadelta" target="_blank" rel="noopener noreferrer">Explorar audio →</a>
+        </div>
+      </div>
     </div>
   </div>
 
