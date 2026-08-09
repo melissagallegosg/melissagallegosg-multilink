@@ -236,6 +236,7 @@
     display: flex;
     flex-direction: column;
     gap: 0;
+    margin-bottom: 40px;
   }
 
   .phase-item {
@@ -264,7 +265,6 @@
     font-size: 12px;
     color: var(--cyan);
     flex-shrink: 0;
-    z-index: 1;
   }
   .phase-line {
     flex: 1;
@@ -288,11 +288,9 @@
     border-color: rgba(0,229,255,0.4);
     box-shadow: 0 4px 30px rgba(91,30,255,0.15);
   }
-
   .phase-action {
     font-family: 'Cinzel', serif;
     font-size: 11px;
-    font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--gold);
@@ -341,18 +339,13 @@
     box-shadow: 0 0 20px rgba(0,229,255,0.4);
     transform: translateX(2px);
   }
-  .phase-cta.locked {
-    background: rgba(182,156,255,0.08);
-    color: var(--silver);
-    border: 1px solid rgba(0,229,255,0.2);
-  }
 
   /* === TOOLS SECTION === */
   .tools-section {
     width: 100%;
-    margin-top: 48px;
     padding-top: 32px;
     border-top: 1px solid rgba(182,156,255,0.1);
+    margin-bottom: 24px;
   }
   .tools-heading {
     font-family: 'Cinzel', serif;
@@ -497,7 +490,7 @@
         <p class="phase-title">Sistema de Coherencia y Sostén Interno</p>
         <p class="phase-desc">Descubre qué patrón está detrás de la forma en que abandonas, postergas o bloqueas tus proyectos.</p>
         <p class="phase-keep">Después de esta fase, guarda: <b>tu patrón principal</b>, <b>tus detonantes</b>, <b>tu protocolo de sostén</b>.</p>
-        <a class="phase-cta" href="https://ritmoalfa.vercel.app/" target="_blank">Comenzar Fase 1 →</a>
+        <a class="phase-cta" href="fase1-identifica.html">Comenzar Fase 1 →</a>
       </div>
     </div>
 
@@ -511,7 +504,7 @@
         <p class="phase-title">Método de Coherencia</p>
         <p class="phase-desc">Alinea lo que piensas, sientes y haces con aquello que quieres construir durante los próximos 12 meses.</p>
         <p class="phase-keep">Después de esta fase, guarda: <b>tu propósito de los próximos 12 meses</b>, <b>tus desalineaciones detectadas</b>.</p>
-        <a class="phase-cta" href="https://metodo369.vercel.app/" target="_blank">Continuar con Fase 2 →</a>
+        <a class="phase-cta" href="fase2-alinea.html">Continuar con Fase 2 →</a>
       </div>
     </div>
 
@@ -525,7 +518,7 @@
         <p class="phase-title">Conexión de tus Pasiones</p>
         <p class="phase-desc">Explora tus intereses, talentos y fuentes de realización para identificar dónde existe una combinación que vale la pena desarrollar.</p>
         <p class="phase-keep">Después de esta fase, guarda: <b>tus intereses principales</b>, <b>tus talentos</b>, <b>tus combinaciones con mayor sentido</b>.</p>
-        <a class="phase-cta" href="https://ikigaitest-mg.vercel.app/" target="_blank">Continuar con Fase 3 →</a>
+        <a class="phase-cta" href="fase3-conecta.html">Continuar con Fase 3 →</a>
       </div>
     </div>
 
@@ -551,11 +544,23 @@
         <p class="phase-action">Fase 5 — Ejecuta</p>
         <p class="phase-title">Ritmo Beta</p>
         <p class="phase-desc">Identifica tu patrón de ejecución y descubre cómo estructurar tu trabajo para avanzar sin depender de impulsos momentáneos.</p>
-        <p class="phase-keep">Fase final: aquí trabajas la ejecución del proyecto priorizado en la Fase 4.</p>
-        <a class="phase-cta" href="https://ritmobeta.vercel.app/" target="_blank">Continuar con Fase 5 →</a>
+        <p class="phase-keep">Después de esta fase, guarda: <b>tu patrón de ejecución</b>. Fase final: aquí trabajas la ejecución del proyecto priorizado en la Fase 4.</p>
+        <a class="phase-cta" href="fase5-ejecuta.html">Continuar con Fase 5 →</a>
       </div>
     </div>
 
+  </div>
+
+  <!-- === TU RECORRIDO === -->
+  <div class="links" style="margin-bottom: 8px;">
+    <a class="link-card" href="resumen.html">
+      <div class="link-icon">✦</div>
+      <div class="link-text">
+        <span class="link-title">Mi resumen del recorrido</span>
+        <span class="link-desc">Lectura consolidada de tus 5 fases</span>
+      </div>
+      <span class="link-arrow">→</span>
+    </a>
   </div>
 
   <!-- === HERRAMIENTAS DE CONEXIÓN === -->
