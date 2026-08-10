@@ -11,6 +11,11 @@ window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var n=window.pi
 pintrk('load', '2613130598653');
 pintrk('page');
 </script>
+<script>
+pintrk('track', 'pagevisit', {
+  event_id: 'index_pagevisit'
+});
+</script>
 <noscript>
 <img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?event=init&tid=2613130598653&noscript=1" />
 </noscript>
@@ -630,7 +635,7 @@ pintrk('page');
         <div class="link-text">
           <span class="link-title">Audio Alfa → Theta → Delta</span>
           <span class="link-desc">Una experiencia de sonido binaural, relajación y visualización diseñada para acompañar una transición progresiva hacia estados de relajación más profundos.</span>
-          <a class="audio-tool-cta" href="https://melissagallegosg.gumroad.com/l/audioalfathetadelta" target="_blank" rel="noopener noreferrer">Explorar audio →</a>
+          <a class="audio-tool-cta" href="https://melissagallegosg.gumroad.com/l/audioalfathetadelta" target="_blank" rel="noopener noreferrer" onclick="if(window.pintrk){pintrk('track','lead',{event_id:'audio_alfathetadelta_lead',lead_type:'Audio Alfa Theta Delta'});}">Explorar audio →</a>
         </div>
       </div>
     </div>
