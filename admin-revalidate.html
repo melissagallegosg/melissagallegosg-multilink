@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Refrescar blog — melissagallegosg</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Poppins:wght@300;400;500&family=DM+Mono:wght@300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #050505; --violet: #5B1EFF; --cyan: #00E5FF; --lavender: #B69CFF; --silver: #c9c3e0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    min-height: 100vh; background: var(--void); color: #fff;
+    font-family: 'Poppins', sans-serif; display: flex; align-items: center; justify-content: center;
+  }
+  .card {
+    max-width: 420px; width: 90%; padding: 36px 28px; border-radius: 18px;
+    border: 1px solid rgba(182,156,255,0.25); background: rgba(91,30,255,0.06); text-align: center;
+  }
+  h1 { font-family: 'Cinzel', serif; font-size: 1.3em; letter-spacing: 2px; color: var(--lavender); margin-bottom: 8px; }
+  p.hint { color: var(--silver); font-size: 0.85em; font-weight: 300; margin-bottom: 24px; }
+  input {
+    width: 100%; padding: 12px 14px; border-radius: 10px; border: 1px solid rgba(182,156,255,0.3);
+    background: rgba(255,255,255,0.04); color: #fff; font-family: 'DM Mono', monospace; margin-bottom: 16px;
+  }
+  button {
+    width: 100%; padding: 12px; border: none; border-radius: 10px; cursor: pointer;
+    font-family: 'Cinzel', serif; letter-spacing: 1px; text-transform: uppercase; font-size: 0.85em;
+    background: linear-gradient(90deg, var(--cyan), var(--violet)); color: var(--void);
+  }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  #result { margin-top: 18px; font-family: 'DM Mono', monospace; font-size: 0.8em; white-space: pre-wrap; }
+  .ok { color: var(--cyan); }
+  .err { color: #ff8a8a; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>Refrescar blog</h1>
+    <p class="hint">Fuerza a traer los últimos posts de Medium ahora mismo, sin esperar el refresco automático.</p>
+    <input id="secret" type="password" placeholder="Clave secreta (BLOG_REVALIDATE_SECRET)">
+    <button id="btn" onclick="revalidate()">Refrescar ahora</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    async function revalidate() {
+      const secret = document.getElementById('secret').value.trim();
+      const btn = document.getElementById('btn');
+      const result = document.getElementById('result');
+      if (!secret) {
+        result.className = 'err';
+        result.textContent = 'Ingresa la clave secreta.';
+        return;
+      }
+      btn.disabled = true;
+      result.className = '';
+      result.textContent = 'Refrescando…';
+      try {
+        const res = await fetch('/api/revalidate?secret=' + encodeURIComponent(secret));
+        const data = await res.json();
+        if (data.ok) {
+          result.className = 'ok';
+          result.textContent = '✓ ' + data.message + ' (' + data.postsCount + ' posts)';
+        } else {
+          result.className = 'err';
+          result.textContent = '✗ ' + (data.error || 'Error desconocido');
+        }
+      } catch (e) {
+        result.className = 'err';
+        result.textContent = '✗ No se pudo contactar al servidor.';
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>

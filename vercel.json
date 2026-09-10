@@ -1,3 +1,7 @@
 {
-  "version": 2
+  "version": 2,
+  "rewrites": [
+    { "source": "/blog", "destination": "/api/blog" },
+    { "source": "/blog/:slug", "destination": "/api/blog/:slug" }
+  ]
 }

@@ -1,0 +1,14 @@
+{
+  "name": "melissagallegosg-multilink",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sitio de melissagallegosg con blog nativo sincronizado desde Medium (RSS).",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "node dev-server.js",
+    "test": "node test/run-tests.js"
+  },
+  "dependencies": {}
+}
