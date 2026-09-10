@@ -1,5 +1,5 @@
 // api/blog.js -> se sirve en /blog (ver rewrite en vercel.json)
-const { getPosts } = require('../lib/medium');
+const { getPosts, getProfileUrl } = require('../lib/medium');
 const { renderShell, escapeHtml, formatDate } = require('../lib/layout');
 
 function renderCard(post) {
@@ -33,8 +33,14 @@ async function handleBlogList(req, res) {
     ? `<div class="error-state">${escapeHtml(errorMessage)}</div>`
     : posts.length
     ? `<div class="post-grid">${posts.map(renderCard).join('')}</div>
-       <p class="feed-note">Mostrando los últimos ${posts.length} artículos publicados en Medium.</p>`
-    : `<div class="empty-state">Todavía no hay artículos publicados.</div>`;
+       <p class="feed-note">Mostrando los últimos ${posts.length} artículos publicados en Medium.</p>
+       <div class="see-more-wrap">
+         <a class="see-more-btn" href="${escapeHtml(getProfileUrl())}" target="_blank" rel="noopener noreferrer">Ver más en Medium →</a>
+       </div>`
+    : `<div class="empty-state">Todavía no hay artículos publicados.</div>
+       <div class="see-more-wrap">
+         <a class="see-more-btn" href="${escapeHtml(getProfileUrl())}" target="_blank" rel="noopener noreferrer">Ver mi Medium →</a>
+       </div>`;
 
   const html = renderShell({
     title: 'Blog — melissagallegosg',
@@ -45,6 +51,7 @@ async function handleBlogList(req, res) {
       ${body}
     `,
     activeIsBlog: true,
+    wide: true,
   });
 
   res.writeHead(errorMessage ? 502 : 200, {
